@@ -81,6 +81,10 @@
       background-color: #FBFBFB;
       color: #2A2E33;
       scroll-behavior: smooth;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      font-feature-settings: 'liga' 1, 'kern' 1;
     }
 
     ::selection {
@@ -105,30 +109,67 @@
     .bg-drafting-grid {
       background-size: 60px 60px;
       background-image: 
-        linear-gradient(to right, rgba(148, 163, 184, 0.06) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(148, 163, 184, 0.06) 1px, transparent 1px);
+        linear-gradient(to right, rgba(148, 163, 184, 0.035) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(148, 163, 184, 0.035) 1px, transparent 1px);
     }
 
     .executive-card {
       background: #FFFFFF;
       border: 1px solid rgba(42, 46, 51, 0.08);
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      border-bottom: 2px solid transparent;
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 2px 12px -3px rgba(42, 46, 51, 0.06), 0 1px 4px -1px rgba(42, 46, 51, 0.03);
     }
     .executive-card:hover {
-      border-color: rgba(27, 138, 158, 0.38);
-      transform: translateY(-4px);
+      border-color: rgba(27, 138, 158, 0.3);
+      border-bottom-color: #1B8A9E;
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px -15px rgba(27, 138, 158, 0.12), 0 8px 20px -5px rgba(42, 46, 51, 0.08);
+    }
+
+    /* Phase progression connector */
+    .phase-grid {
+      position: relative;
+    }
+    .phase-grid::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 2%, rgba(27, 138, 158, 0.15) 15%, rgba(27, 138, 158, 0.25) 50%, rgba(27, 138, 158, 0.15) 85%, transparent 98%);
+      z-index: 0;
+      pointer-events: none;
+    }
+    @media (max-width: 767px) {
+      .phase-grid::before {
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        right: auto;
+        width: 1px;
+        height: auto;
+        background: linear-gradient(180deg, transparent 2%, rgba(27, 138, 158, 0.15) 15%, rgba(27, 138, 158, 0.25) 50%, rgba(27, 138, 158, 0.15) 85%, transparent 98%);
+      }
+    }
+    .phase-card {
+      position: relative;
+      z-index: 1;
     }
 
     .dropdown-menu {
       opacity: 0;
       visibility: hidden;
-      transform: translateY(8px);
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateY(8px) scale(0.97);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
     }
     .group:hover .dropdown-menu {
       opacity: 1;
       visibility: visible;
-      transform: translateY(0);
+      transform: translateY(0) scale(1);
     }
 
     .font-fancy-italic {
@@ -146,6 +187,159 @@
       display: inline-block;
       letter-spacing: normal;
     }
+
+    /* Section visual separators */
+    .section-divider-teal {
+      position: relative;
+    }
+    .section-divider-teal::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #1B8A9E, transparent);
+    }
+
+    /* Ambient glow for sections */
+    .section-glow {
+      position: relative;
+      overflow: hidden;
+    }
+    .section-glow::after {
+      content: '';
+      position: absolute;
+      top: -150px;
+      right: -100px;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(27, 138, 158, 0.04) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Scroll reveal animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-5 { transition-delay: 0.5s; }
+    .reveal-delay-6 { transition-delay: 0.6s; }
+
+    /* Footer premium finish */
+    .footer-glow {
+      position: relative;
+    }
+    .footer-glow::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #1B8A9E 30%, #4FB2C4 50%, #1B8A9E 70%, transparent);
+    }
+    .footer-glow::after {
+      content: '';
+      position: absolute;
+      top: -80px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 200px;
+      background: radial-gradient(ellipse, rgba(27, 138, 158, 0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .footer-link {
+      position: relative;
+      transition: color 0.3s ease;
+    }
+    .footer-link::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: #1B8A9E;
+      transition: width 0.3s ease;
+    }
+    .footer-link:hover::after {
+      width: 100%;
+    }
+
+    /* Mobile menu slide animation */
+    #mobileMenu {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), padding 0.3s ease;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+    #mobileMenu.mobile-open {
+      max-height: 400px;
+      padding-top: 1.5rem;
+      padding-bottom: 1.5rem;
+    }
+  
+    /* High-Contrast Obsidian & Luxury Utilities */
+    .executive-card-dark {
+      background: #0D1218;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-bottom: 2px solid transparent;
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.4);
+    }
+    .executive-card-dark:hover {
+      border-color: rgba(79, 178, 196, 0.4);
+      border-bottom-color: #1B8A9E;
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px -15px rgba(27, 138, 158, 0.22), 0 8px 25px -5px rgba(0, 0, 0, 0.5);
+    }
+
+    .bg-drafting-grid-dark {
+      background-size: 60px 60px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    }
+
+    .ambient-glow-center {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 350px;
+      background: radial-gradient(ellipse at center, rgba(27, 138, 158, 0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* Watermark numerals via CSS pseudo-elements (Zero content added) */
+    .watermark-I, .watermark-II, .watermark-III, .watermark-IV,
+    .mandate-watermark-1, .mandate-watermark-2, .mandate-watermark-3 {
+      position: relative;
+    }
+    .watermark-I::before { content: 'I'; font-family: 'Cinzel', serif; position: absolute; right: 1.25rem; top: 1rem; font-size: 2.25rem; line-height: 1; font-weight: 600; color: rgba(79, 178, 196, 0.12); pointer-events: none; }
+    .watermark-II::before { content: 'II'; font-family: 'Cinzel', serif; position: absolute; right: 1.25rem; top: 1rem; font-size: 2.25rem; line-height: 1; font-weight: 600; color: rgba(79, 178, 196, 0.12); pointer-events: none; }
+    .watermark-III::before { content: 'III'; font-family: 'Cinzel', serif; position: absolute; right: 1.25rem; top: 1rem; font-size: 2.25rem; line-height: 1; font-weight: 600; color: rgba(79, 178, 196, 0.12); pointer-events: none; }
+    .watermark-IV::before { content: 'IV'; font-family: 'Cinzel', serif; position: absolute; right: 1.25rem; top: 1rem; font-size: 2.25rem; line-height: 1; font-weight: 600; color: rgba(79, 178, 196, 0.12); pointer-events: none; }
+
+    .mandate-watermark-1::before { content: '01'; font-family: 'Cinzel', serif; position: absolute; right: 1.25rem; top: 1rem; font-size: 2.25rem; line-height: 1; font-weight: 600; color: rgba(79, 178, 196, 0.12); pointer-events: none; }
+    .mandate-watermark-2::before { content: '02'; font-family: 'Cinzel', serif; position: absolute; right: 1.25rem; top: 1rem; font-size: 2.25rem; line-height: 1; font-weight: 600; color: rgba(79, 178, 196, 0.12); pointer-events: none; }
+    .mandate-watermark-3::before { content: '03'; font-family: 'Cinzel', serif; position: absolute; right: 1.25rem; top: 1rem; font-size: 2.25rem; line-height: 1; font-weight: 600; color: rgba(79, 178, 196, 0.12); pointer-events: none; }
+
   </style>
 </head>
 <body class="bg-canvas text-ink font-sans selection:bg-aurionTeal selection:text-white overflow-x-hidden">
@@ -191,7 +385,7 @@
           </a>
 
           <!-- Dropdown Panel -->
-          <div class="dropdown-menu absolute top-full left-1/2 -translate-x-1/2 w-[560px] bg-canvasPure border border-canvasBorder rounded-2xl shadow-2xl p-5 grid grid-cols-2 gap-3 z-50">
+          <div class="dropdown-menu absolute top-full left-1/2 -translate-x-1/2 w-[560px] bg-canvasPure border border-canvasBorder border-t-2 border-t-aurionTeal/30 rounded-2xl shadow-2xl p-5 grid grid-cols-2 gap-3 z-50">
             
             <button onclick="openPracticeDrawer('ips')" class="col-span-2 text-left p-3.5 rounded-xl bg-aurionTeal-light/40 border border-aurionTeal/25 hover:bg-aurionTeal-light transition-all flex items-start space-x-3">
               <span class="w-8 h-8 rounded-lg bg-aurionTeal text-white flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
@@ -264,7 +458,7 @@
 
       <!-- Header CTA -->
       <div class="hidden sm:flex items-center space-x-4">
-        <a href="#contact" class="px-5 py-2.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider text-noir bg-gradient-to-r from-aurionTeal-vibrant to-aurionTeal-glow hover:brightness-110 shadow-glow-teal transition-all">
+        <a href="#contact" class="px-5 py-2.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider text-noir bg-gradient-to-r from-aurionTeal-vibrant to-aurionTeal-glow hover:brightness-110 shadow-glow-teal transition-all hover:scale-[1.03] transform">
           Schedule a Consultation
         </a>
       </div>
@@ -331,17 +525,17 @@
         </p>
 
         <!-- Supporting Body Copy: Narrower editorial width (max-w-[560px]), line-height 1.62-1.65, spaced 36px above CTA -->
-        <p class="font-sans text-[12px] sm:text-[13px] md:text-[14.5px] text-slate-300 max-w-[560px] font-normal leading-[1.62] sm:leading-[1.65] mb-[28px] sm:mb-[32px] lg:mb-[36px] drop-shadow">
+        <p class="font-sans text-[12px] sm:text-[13px] md:text-[14.5px] text-slate-200 max-w-[560px] font-normal leading-[1.62] sm:leading-[1.65] mb-[28px] sm:mb-[32px] lg:mb-[36px] drop-shadow">
           Aurion works with healthcare leaders to turn complex priorities into executable strategies, stronger operating models, international growth, and measurable performance.
         </p>
 
         <!-- Executive CTA Group: Balanced 20px gap, same height, vertically aligned -->
         <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 sm:gap-5">
-          <a href="#contact" class="group h-[48px] px-7 rounded-full bg-white hover:bg-slate-100 text-noir font-mono text-[12px] font-bold uppercase tracking-wider shadow-lg transition-all flex items-center justify-center space-x-2">
+          <a href="#contact" class="group h-[48px] px-7 rounded-full bg-white hover:bg-slate-100 text-noir font-mono text-[12px] font-bold uppercase tracking-wider shadow-lg transition-all hover:scale-[1.02] transform flex items-center justify-center space-x-2">
             <span>Schedule an Executive Consultation</span>
             <i data-lucide="arrow-right" class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"></i>
           </a>
-          <a href="#capabilities" class="h-[48px] px-7 rounded-full border border-white/30 bg-black/40 hover:bg-white/10 hover:border-white/50 text-white font-mono text-[12px] font-semibold uppercase tracking-wider backdrop-blur-sm transition-all flex items-center justify-center space-x-2">
+          <a href="#capabilities" class="h-[48px] px-7 rounded-full border border-white/30 bg-black/40 hover:bg-white/10 hover:border-white/50 text-white font-mono text-[12px] font-semibold uppercase tracking-wider backdrop-blur-sm transition-all hover:scale-[1.02] transform flex items-center justify-center space-x-2">
             <span>Explore Our Capabilities</span>
           </a>
         </div>
@@ -353,49 +547,49 @@
   <!-- ================================================================= -->
   <!-- 2.1 EXECUTIVE METRIC STRIP (With Micro-Visuals & High Relevance)  -->
   <!-- ================================================================= -->
-  <section class="bg-canvasPure border-b border-canvasBorder py-12 relative">
+  <section class="bg-[#080B0C] border-b border-white/10 py-14 relative overflow-hidden section-glow">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         
         <!-- Proof Card 1 -->
-        <div class="p-5 sm:p-6 rounded-2xl bg-canvas border border-canvasBorder shadow-sm flex items-start gap-4 hover:border-aurionTeal/40 transition-all group">
-          <div class="w-[38%] sm:w-[40%] max-w-[110px] aspect-square rounded-xl overflow-hidden shrink-0 border border-aurionTeal/20 shadow-sm relative group-hover:border-aurionTeal/40 transition-all">
+        <div class="p-5 sm:p-6 rounded-2xl executive-card-dark border border-white/10 flex items-start gap-4 transition-all duration-300 group reveal">
+          <div class="w-[38%] sm:w-[40%] max-w-[110px] aspect-square rounded-xl overflow-hidden shrink-0 border border-aurionTeal/40 shadow-sm relative group-hover:border-aurionTeal/40 transition-all">
             <img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=400&q=80" 
                  alt="Healthcare Expertise" 
                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
             <div class="absolute inset-0 bg-aurionTeal/15 mix-blend-multiply"></div>
           </div>
           <div class="flex-1 min-w-0">
-            <div class="flex items-center space-x-1 text-aurionTeal font-mono text-[10px] font-bold uppercase tracking-wider">
+            <div class="flex items-center space-x-1 text-aurionTeal-glow font-mono text-[10px] font-bold uppercase tracking-wider">
               <i data-lucide="stethoscope" class="w-3 h-3 shrink-0"></i>
               <span class="truncate">CLINICALLY INFORMED</span>
             </div>
-            <div class="text-base sm:text-lg font-bold font-serif text-ink tracking-tight mt-1 leading-snug">Healthcare Expertise</div>
-            <p class="text-[11px] text-inkDim mt-1 leading-relaxed">Senior healthcare advisory grounded in clinical, operational, and institutional reality.</p>
+            <div class="text-base sm:text-lg font-bold font-serif text-slate-100 tracking-tight mt-1 leading-snug">Healthcare Expertise</div>
+            <p class="text-[11px] text-slate-200 mt-1 leading-relaxed">Senior healthcare advisory grounded in clinical, operational, and institutional reality.</p>
           </div>
         </div>
 
         <!-- Proof Card 2 -->
-        <div class="p-5 sm:p-6 rounded-2xl bg-canvas border border-canvasBorder shadow-sm flex items-start gap-4 hover:border-aurionTeal/40 transition-all group">
-          <div class="w-[38%] sm:w-[40%] max-w-[110px] aspect-square rounded-xl overflow-hidden shrink-0 border border-aurionTeal/20 shadow-sm relative group-hover:border-aurionTeal/40 transition-all">
+        <div class="p-5 sm:p-6 rounded-2xl executive-card-dark border border-white/10 flex items-start gap-4 transition-all duration-300 group reveal reveal-delay-1">
+          <div class="w-[38%] sm:w-[40%] max-w-[110px] aspect-square rounded-xl overflow-hidden shrink-0 border border-aurionTeal/40 shadow-sm relative group-hover:border-aurionTeal/40 transition-all">
             <img src="https://images.unsplash.com/photo-1488085061387-422e29b40080?auto=format&fit=crop&w=400&q=80" 
                  alt="Egypt ↔ GCC" 
                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
             <div class="absolute inset-0 bg-aurionTeal/15 mix-blend-multiply"></div>
           </div>
           <div class="flex-1 min-w-0">
-            <div class="flex items-center space-x-1 text-aurionTeal font-mono text-[10px] font-bold uppercase tracking-wider">
+            <div class="flex items-center space-x-1 text-aurionTeal-glow font-mono text-[10px] font-bold uppercase tracking-wider">
               <i data-lucide="plane-takeoff" class="w-3 h-3 shrink-0"></i>
               <span class="truncate">CROSS-BORDER</span>
             </div>
-            <div class="text-base sm:text-lg font-bold font-serif text-ink tracking-tight mt-1 leading-snug">Egypt ↔ GCC</div>
-            <p class="text-[11px] text-inkDim mt-1 leading-relaxed">Building structured international patient pathways and cross-border healthcare partnerships.</p>
+            <div class="text-base sm:text-lg font-bold font-serif text-slate-100 tracking-tight mt-1 leading-snug">Egypt ↔ GCC</div>
+            <p class="text-[11px] text-slate-200 mt-1 leading-relaxed">Building structured international patient pathways and cross-border healthcare partnerships.</p>
           </div>
         </div>
 
         <!-- Proof Card 3 -->
-        <div class="p-5 sm:p-6 rounded-2xl bg-canvas border border-canvasBorder shadow-sm flex items-start gap-4 hover:border-aurionTeal/40 transition-all group">
-          <div class="w-[38%] sm:w-[40%] max-w-[110px] aspect-square rounded-xl overflow-hidden shrink-0 border border-aurionTeal/20 shadow-sm relative group-hover:border-aurionTeal/40 transition-all">
+        <div class="p-5 sm:p-6 rounded-2xl executive-card-dark border border-white/10 flex items-start gap-4 transition-all duration-300 group reveal reveal-delay-2">
+          <div class="w-[38%] sm:w-[40%] max-w-[110px] aspect-square rounded-xl overflow-hidden shrink-0 border border-aurionTeal/40 shadow-sm relative group-hover:border-aurionTeal/40 transition-all">
             <img src="proof-integrated-capabilities.jpg" 
                  alt="8 Core Capabilities" 
                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
@@ -403,18 +597,18 @@
             <div class="absolute inset-0 bg-aurionTeal/10 mix-blend-multiply"></div>
           </div>
           <div class="flex-1 min-w-0">
-            <div class="flex items-center space-x-1 text-aurionTeal font-mono text-[10px] font-bold uppercase tracking-wider">
+            <div class="flex items-center space-x-1 text-aurionTeal-glow font-mono text-[10px] font-bold uppercase tracking-wider">
               <i data-lucide="layers" class="w-3 h-3 shrink-0"></i>
               <span class="truncate">INTEGRATED</span>
             </div>
-            <div class="text-base sm:text-lg font-bold font-serif text-ink tracking-tight mt-1 leading-snug">8 Core Capabilities</div>
-            <p class="text-[11px] text-inkDim mt-1 leading-relaxed">Strategy, operations, digital health, commercial growth, and transformation, connected as one integrated agenda.</p>
+            <div class="text-base sm:text-lg font-bold font-serif text-slate-100 tracking-tight mt-1 leading-snug">8 Core Capabilities</div>
+            <p class="text-[11px] text-slate-200 mt-1 leading-relaxed">Strategy, operations, digital health, commercial growth, and transformation, connected as one integrated agenda.</p>
           </div>
         </div>
 
         <!-- Proof Card 4 -->
-        <div class="p-5 sm:p-6 rounded-2xl bg-canvas border border-canvasBorder shadow-sm flex items-start gap-4 hover:border-aurionTeal/40 transition-all group">
-          <div class="w-[38%] sm:w-[40%] max-w-[110px] aspect-square rounded-xl overflow-hidden shrink-0 border border-aurionTeal/20 shadow-sm relative group-hover:border-aurionTeal/40 transition-all">
+        <div class="p-5 sm:p-6 rounded-2xl executive-card-dark border border-white/10 flex items-start gap-4 transition-all duration-300 group reveal reveal-delay-3">
+          <div class="w-[38%] sm:w-[40%] max-w-[110px] aspect-square rounded-xl overflow-hidden shrink-0 border border-aurionTeal/40 shadow-sm relative group-hover:border-aurionTeal/40 transition-all">
             <img src="proof-execution-moves.jpg" 
                  alt="Execution That Moves" 
                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
@@ -422,12 +616,12 @@
             <div class="absolute inset-0 bg-aurionTeal/10 mix-blend-multiply"></div>
           </div>
           <div class="flex-1 min-w-0">
-            <div class="flex items-center space-x-1 text-aurionTeal font-mono text-[10px] font-bold uppercase tracking-wider">
+            <div class="flex items-center space-x-1 text-aurionTeal-glow font-mono text-[10px] font-bold uppercase tracking-wider">
               <i data-lucide="trending-up" class="w-3 h-3 shrink-0"></i>
               <span class="truncate">PERFORMANCE</span>
             </div>
-            <div class="text-base sm:text-lg font-bold font-serif text-ink tracking-tight mt-1 leading-snug">Execution That Moves</div>
-            <p class="text-[11px] text-inkDim mt-1 leading-relaxed">Turning strategic priorities into stronger operating performance, measurable progress, and sustainable value.</p>
+            <div class="text-base sm:text-lg font-bold font-serif text-slate-100 tracking-tight mt-1 leading-snug">Execution That Moves</div>
+            <p class="text-[11px] text-slate-200 mt-1 leading-relaxed">Turning strategic priorities into stronger operating performance, measurable progress, and sustainable value.</p>
           </div>
         </div>
 
@@ -441,7 +635,7 @@
   <section id="about" class="py-24 bg-canvas border-b border-canvasBorder relative bg-drafting-grid">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
       
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center reveal">
         <div class="lg:col-span-6 space-y-6">
           <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-aurionTeal/10 border border-aurionTeal/20 text-aurionTeal text-[10px] font-mono uppercase tracking-widest font-bold">
             <i data-lucide="compass" class="w-3 h-3"></i>
@@ -587,7 +781,7 @@
                   <div class="w-8 h-8 rounded-xl bg-aurionTeal/10 border border-aurionTeal/20 text-aurionTeal flex items-center justify-center group-hover:bg-aurionTeal group-hover:text-white transition-all">
                     <i data-lucide="target" class="w-4 h-4"></i>
                   </div>
-                  <span class="font-mono text-[10px] text-aurionTeal font-bold uppercase tracking-wider">[ VALUE 01 ]</span>
+                  
                 </div>
                 <h4 class="font-serif text-base font-bold text-ink tracking-tight mb-1">OWN THE OUTCOME</h4>
                 <div class="text-xs font-mono font-semibold text-aurionTeal mb-2">We take responsibility for results, not just recommendations.</div>
@@ -604,7 +798,7 @@
                   <div class="w-8 h-8 rounded-xl bg-aurionTeal/10 border border-aurionTeal/20 text-aurionTeal flex items-center justify-center group-hover:bg-aurionTeal group-hover:text-white transition-all">
                     <i data-lucide="microscope" class="w-4 h-4"></i>
                   </div>
-                  <span class="font-mono text-[10px] text-aurionTeal font-bold uppercase tracking-wider">[ VALUE 02 ]</span>
+                  
                 </div>
                 <h4 class="font-serif text-base font-bold text-ink tracking-tight mb-1">LEAD WITH EVIDENCE</h4>
                 <div class="text-xs font-mono font-semibold text-aurionTeal mb-2">We earn confidence through rigor.</div>
@@ -621,7 +815,7 @@
                   <div class="w-8 h-8 rounded-xl bg-aurionTeal/10 border border-aurionTeal/20 text-aurionTeal flex items-center justify-center group-hover:bg-aurionTeal group-hover:text-white transition-all">
                     <i data-lucide="network" class="w-4 h-4"></i>
                   </div>
-                  <span class="font-mono text-[10px] text-aurionTeal font-bold uppercase tracking-wider">[ VALUE 03 ]</span>
+                  
                 </div>
                 <h4 class="font-serif text-base font-bold text-ink tracking-tight mb-1">THINK IN SYSTEMS</h4>
                 <div class="text-xs font-mono font-semibold text-aurionTeal mb-2">We solve interconnected problems as one system.</div>
@@ -638,7 +832,7 @@
                   <div class="w-8 h-8 rounded-xl bg-aurionTeal/10 border border-aurionTeal/20 text-aurionTeal flex items-center justify-center group-hover:bg-aurionTeal group-hover:text-white transition-all">
                     <i data-lucide="globe-2" class="w-4 h-4"></i>
                   </div>
-                  <span class="font-mono text-[10px] text-aurionTeal font-bold uppercase tracking-wider">[ VALUE 04 ]</span>
+                  
                 </div>
                 <h4 class="font-serif text-base font-bold text-ink tracking-tight mb-1">KNOW THE CONTEXT</h4>
                 <div class="text-xs font-mono font-semibold text-aurionTeal mb-2">We combine global standards with regional intelligence.</div>
@@ -655,7 +849,7 @@
                   <div class="w-8 h-8 rounded-xl bg-aurionTeal/10 border border-aurionTeal/20 text-aurionTeal flex items-center justify-center group-hover:bg-aurionTeal group-hover:text-white transition-all">
                     <i data-lucide="building-2" class="w-4 h-4"></i>
                   </div>
-                  <span class="font-mono text-[10px] text-aurionTeal font-bold uppercase tracking-wider">[ VALUE 05 ]</span>
+                  
                 </div>
                 <h4 class="font-serif text-base font-bold text-ink tracking-tight mb-1">BUILD INSTITUTIONAL VALUE</h4>
                 <div class="text-xs font-mono font-semibold text-aurionTeal mb-2">We leave institutions stronger than we found them.</div>
@@ -672,7 +866,7 @@
                   <div class="w-8 h-8 rounded-xl bg-aurionTeal/10 border border-aurionTeal/20 text-aurionTeal flex items-center justify-center group-hover:bg-aurionTeal group-hover:text-white transition-all">
                     <i data-lucide="sparkles" class="w-4 h-4"></i>
                   </div>
-                  <span class="font-mono text-[10px] text-aurionTeal font-bold uppercase tracking-wider">[ VALUE 06 ]</span>
+                  
                 </div>
                 <h4 class="font-serif text-base font-bold text-ink tracking-tight mb-1">CHALLENGE AND IMPROVE</h4>
                 <div class="text-xs font-mono font-semibold text-aurionTeal mb-2">We never confuse experience with certainty.</div>
@@ -704,7 +898,7 @@
   <section id="capabilities" class="py-24 bg-canvasPure border-b border-canvasBorder relative">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
       
-      <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6 reveal">
         <div class="max-w-3xl space-y-3">
           <div class="inline-flex items-center space-x-2 text-[10px] font-mono uppercase tracking-widest text-aurionTeal font-bold">
             <span class="w-1.5 h-1.5 rounded-full bg-aurionTeal"></span>
@@ -728,18 +922,17 @@
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8">
         
         <!-- 1. Flagship: International Corridors (Airplane / Airport Concourse / Medical Tourism) -->
-        <div class="executive-card lg:col-span-2 rounded-3xl overflow-hidden flex flex-col justify-between shadow-executive hover:shadow-executive-hover group border-aurionTeal/40">
+        <div class="executive-card lg:col-span-2 rounded-3xl overflow-hidden flex flex-col justify-between shadow-executive hover:shadow-executive-hover group border-aurionTeal/40 reveal">
           <div class="h-64 overflow-hidden relative">
             <!-- User-Provided Contextual Medical Tourism & Cross-Border Patient Corridor Photography -->
             <img src="capability-international-patients.jpg" 
                  alt="International Patient Travel & Medical Tourism Corridor" 
-                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-95"
+                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-[0.92] saturate-[1.05]"
                  onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1200&q=80';" />
             <div class="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/25 to-transparent"></div>
             
-            <div class="absolute top-4 left-4 font-mono text-[11px] font-bold text-white bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-white/20 flex items-center space-x-1.5">
-              <i data-lucide="plane-takeoff" class="w-3 h-3 text-aurionTeal-vibrant"></i>
-              <span>[ 01 ]</span>
+            <div class="absolute top-4 left-4 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex items-center justify-center shadow-md z-10">
+              <i data-lucide="plane-takeoff" class="w-3.5 h-3.5 text-aurionTeal-glow"></i>
             </div>
             <span class="absolute top-4 right-4 px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-wider bg-aurionGold text-white font-bold backdrop-blur-md shadow">★ Flagship Practice</span>
             
@@ -770,7 +963,7 @@
                 <span class="text-[10px] font-mono uppercase text-inkDim block">Outcome</span>
                 <span class="text-xs font-semibold text-ink">Hard-Currency Patient Liquidity</span>
               </div>
-              <button onclick="openPracticeDrawer('ips')" class="w-9 h-9 rounded-full bg-canvasSubtle group-hover:bg-aurionTeal group-hover:text-white flex items-center justify-center text-ink transition-colors">
+              <button onclick="openPracticeDrawer('ips')" class="w-9 h-9 rounded-full bg-canvasSubtle group-hover:bg-aurionTeal group-hover:text-white flex items-center justify-center text-ink transition-colors hover:scale-110 transform">
                 <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
               </button>
             </div>
@@ -778,18 +971,17 @@
         </div>
 
         <!-- 2. Strategy & Transformation (Executive Boardroom with Charts & KPIs) -->
-        <div class="executive-card lg:col-span-2 rounded-3xl overflow-hidden flex flex-col justify-between shadow-executive hover:shadow-executive-hover group">
+        <div class="executive-card lg:col-span-2 rounded-3xl overflow-hidden flex flex-col justify-between shadow-executive hover:shadow-executive-hover group reveal reveal-delay-1">
           <div class="h-64 overflow-hidden relative">
             <!-- User-Provided Healthcare Strategy Boardroom Reviewing KPIs & Strategic Priorities -->
             <img src="capability-strategy-boardroom.webp" 
                  alt="Healthcare Strategy Boardroom Reviewing Strategic Priorities & KPIs" 
-                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-95"
+                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-[0.92] saturate-[1.05]"
                  onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80';" />
-            <div class="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/25 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-tr from-ink/85 via-ink/25 to-transparent"></div>
             
-            <div class="absolute top-4 left-4 font-mono text-[11px] font-bold text-white bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-white/20 flex items-center space-x-1.5">
-              <i data-lucide="trending-up" class="w-3 h-3 text-aurionTeal-vibrant"></i>
-              <span>[ 02 ]</span>
+            <div class="absolute top-4 left-4 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex items-center justify-center shadow-md z-10">
+              <i data-lucide="trending-up" class="w-3.5 h-3.5 text-aurionTeal-glow"></i>
             </div>
             <span class="absolute top-4 right-4 px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-wider bg-canvasPure/90 text-ink font-bold backdrop-blur-md">Board Advisory</span>
             
@@ -819,7 +1011,7 @@
                 <span class="text-[10px] font-mono uppercase text-inkDim block">Outcome</span>
                 <span class="text-xs font-semibold text-ink">Enterprise Value & Board Alignment</span>
               </div>
-              <button onclick="openPracticeDrawer('strategy')" class="w-9 h-9 rounded-full bg-canvasSubtle group-hover:bg-aurionTeal group-hover:text-white flex items-center justify-center text-ink transition-colors">
+              <button onclick="openPracticeDrawer('strategy')" class="w-9 h-9 rounded-full bg-canvasSubtle group-hover:bg-aurionTeal group-hover:text-white flex items-center justify-center text-ink transition-colors hover:scale-110 transform">
                 <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
               </button>
             </div>
@@ -827,18 +1019,17 @@
         </div>
 
         <!-- 3. Operations & Turnaround (Clinical Leadership / Medical Team in Hospital Setting) -->
-        <div class="executive-card lg:col-span-2 rounded-3xl overflow-hidden flex flex-col justify-between shadow-executive hover:shadow-executive-hover group">
+        <div class="executive-card lg:col-span-2 rounded-3xl overflow-hidden flex flex-col justify-between shadow-executive hover:shadow-executive-hover group reveal reveal-delay-2">
           <div class="h-64 overflow-hidden relative">
             <!-- User-Provided Surgical Suite Operating Team & Clinical Throughput -->
             <img src="capability-operations-clinical.jpg" 
                  alt="Clinical Operations & Surgical Throughput" 
-                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-95"
+                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-[0.92] saturate-[1.05]"
                  onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1582750433449-648ed127bb54?auto=format&fit=crop&w=1200&q=80';" />
             <div class="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/25 to-transparent"></div>
             
-            <div class="absolute top-4 left-4 font-mono text-[11px] font-bold text-white bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-white/20 flex items-center space-x-1.5">
-              <i data-lucide="activity" class="w-3 h-3 text-aurionTeal-vibrant"></i>
-              <span>[ 03 ]</span>
+            <div class="absolute top-4 left-4 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex items-center justify-center shadow-md z-10">
+              <i data-lucide="activity" class="w-3.5 h-3.5 text-aurionTeal-glow"></i>
             </div>
             <span class="absolute top-4 right-4 px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-wider bg-canvasPure/90 text-ink font-bold backdrop-blur-md">Clinical Velocity</span>
             
@@ -868,7 +1059,7 @@
                 <span class="text-[10px] font-mono uppercase text-inkDim block">Outcome</span>
                 <span class="text-xs font-semibold text-ink">Bed Velocity & Bottleneck Removal</span>
               </div>
-              <button onclick="openPracticeDrawer('ops')" class="w-9 h-9 rounded-full bg-canvasSubtle group-hover:bg-aurionTeal group-hover:text-white flex items-center justify-center text-ink transition-colors">
+              <button onclick="openPracticeDrawer('ops')" class="w-9 h-9 rounded-full bg-canvasSubtle group-hover:bg-aurionTeal group-hover:text-white flex items-center justify-center text-ink transition-colors hover:scale-110 transform">
                 <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
               </button>
             </div>
@@ -876,18 +1067,17 @@
         </div>
 
         <!-- 4. Prestige Wellness Spaces (Luxury Aesthetic Treatment & Procedure Room) -->
-        <div class="executive-card lg:col-span-2 rounded-3xl overflow-hidden flex flex-col justify-between shadow-executive hover:shadow-executive-hover group">
+        <div class="executive-card lg:col-span-2 rounded-3xl overflow-hidden flex flex-col justify-between shadow-executive hover:shadow-executive-hover group reveal reveal-delay-3">
           <div class="h-64 overflow-hidden relative">
             <!-- User-Provided Elite Wellness & Aesthetic Clinical Procedure Suite -->
             <img src="capability-wellness-spaces.jpg" 
                  alt="Elite Aesthetic & Wellness Clinic Procedure Suite" 
-                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-95"
+                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-[0.92] saturate-[1.05]"
                  onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1629909615184-74f495363b67?auto=format&fit=crop&w=1200&q=80';" />
-            <div class="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/25 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-tr from-ink/85 via-ink/25 to-transparent"></div>
             
-            <div class="absolute top-4 left-4 font-mono text-[11px] font-bold text-white bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-white/20 flex items-center space-x-1.5">
-              <i data-lucide="gem" class="w-3 h-3 text-aurionTeal-vibrant"></i>
-              <span>[ 04 ]</span>
+            <div class="absolute top-4 left-4 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex items-center justify-center shadow-md z-10">
+              <i data-lucide="gem" class="w-3.5 h-3.5 text-aurionTeal-glow"></i>
             </div>
             <span class="absolute top-4 right-4 px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-wider bg-canvasPure/90 text-ink font-bold backdrop-blur-md">Prestige Design</span>
             
@@ -917,7 +1107,7 @@
                 <span class="text-[10px] font-mono uppercase text-inkDim block">Outcome</span>
                 <span class="text-xs font-semibold text-ink">Premium Private-Pay Patient Loyalty</span>
               </div>
-              <button onclick="openPracticeDrawer('spaces')" class="w-9 h-9 rounded-full bg-canvasSubtle group-hover:bg-aurionTeal group-hover:text-white flex items-center justify-center text-ink transition-colors">
+              <button onclick="openPracticeDrawer('spaces')" class="w-9 h-9 rounded-full bg-canvasSubtle group-hover:bg-aurionTeal group-hover:text-white flex items-center justify-center text-ink transition-colors hover:scale-110 transform">
                 <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
               </button>
             </div>
@@ -925,13 +1115,13 @@
         </div>
 
         <!-- 5. Mega Healthcare Congresses (Sovereign Medical Summit Plenary) -->
-        <div class="executive-card lg:col-span-2 rounded-3xl overflow-hidden flex flex-col justify-between shadow-executive hover:shadow-executive-hover group">
+        <div class="executive-card lg:col-span-2 rounded-3xl overflow-hidden flex flex-col justify-between shadow-executive hover:shadow-executive-hover group reveal reveal-delay-4">
           <div class="h-64 overflow-hidden relative flex">
             <!-- Left: Sovereign Keynote Stage & Clinical Stethoscope -->
             <div class="w-1/2 h-full overflow-hidden relative">
               <img src="capability-congresses-stage.jpg" 
                    alt="Healthcare Congress Plenary Stage" 
-                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-95"
+                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-[0.92] saturate-[1.05]"
                    onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=600&q=80';" />
               <div class="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-black/50"></div>
             </div>
@@ -939,16 +1129,15 @@
             <div class="w-1/2 h-full overflow-hidden relative border-l border-white/15">
               <img src="capability-congresses-audience.jpg" 
                    alt="Physician Leadership Delegation" 
-                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-95"
+                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-[0.92] saturate-[1.05]"
                    onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=600&q=80';" />
               <div class="absolute inset-0 bg-gradient-to-l from-transparent via-transparent to-black/50"></div>
             </div>
             
             <div class="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/20 to-transparent pointer-events-none"></div>
             
-            <div class="absolute top-4 left-4 font-mono text-[11px] font-bold text-white bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-white/20 flex items-center space-x-1.5 z-10">
-              <i data-lucide="award" class="w-3 h-3 text-aurionTeal-vibrant"></i>
-              <span>[ 05 ]</span>
+            <div class="absolute top-4 left-4 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex items-center justify-center shadow-md z-10">
+              <i data-lucide="award" class="w-3.5 h-3.5 text-aurionTeal-glow"></i>
             </div>
             <span class="absolute top-4 right-4 px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-wider bg-canvasPure/90 text-ink font-bold backdrop-blur-md z-10">Summit Advisory</span>
             
@@ -978,7 +1167,7 @@
                 <span class="text-[10px] font-mono uppercase text-inkDim block">Outcome</span>
                 <span class="text-xs font-semibold text-ink">Ecosystem Convening Power & Standing</span>
               </div>
-              <button onclick="openPracticeDrawer('events')" class="w-9 h-9 rounded-full bg-canvasSubtle group-hover:bg-aurionTeal group-hover:text-white flex items-center justify-center text-ink transition-colors">
+              <button onclick="openPracticeDrawer('events')" class="w-9 h-9 rounded-full bg-canvasSubtle group-hover:bg-aurionTeal group-hover:text-white flex items-center justify-center text-ink transition-colors hover:scale-110 transform">
                 <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
               </button>
             </div>
@@ -986,18 +1175,17 @@
         </div>
 
         <!-- 6. Digital Health Informatics (Doctor with Tablet / EMR Systems) -->
-        <div class="executive-card lg:col-span-2 rounded-3xl overflow-hidden flex flex-col justify-between shadow-executive hover:shadow-executive-hover group">
+        <div class="executive-card lg:col-span-2 rounded-3xl overflow-hidden flex flex-col justify-between shadow-executive hover:shadow-executive-hover group reveal reveal-delay-5">
           <div class="h-64 overflow-hidden relative">
             <!-- User-Provided Digital Health Architecture, AI Diagnostics & Anatomy Telemetry -->
             <img src="capability-digital-health.jpg" 
                  alt="Digital Health Architecture, AI Diagnostics & Clinical Telemetry" 
-                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-95"
+                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-[0.92] saturate-[1.05]"
                  onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80';" />
-            <div class="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/25 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-bl from-ink/85 via-ink/25 to-transparent"></div>
             
-            <div class="absolute top-4 left-4 font-mono text-[11px] font-bold text-white bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-white/20 flex items-center space-x-1.5">
-              <i data-lucide="cpu" class="w-3 h-3 text-aurionTeal-vibrant"></i>
-              <span>[ 06 ]</span>
+            <div class="absolute top-4 left-4 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex items-center justify-center shadow-md z-10">
+              <i data-lucide="cpu" class="w-3.5 h-3.5 text-aurionTeal-glow"></i>
             </div>
             <span class="absolute top-4 right-4 px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-wider bg-canvasPure/90 text-ink font-bold backdrop-blur-md">Informatics Practice</span>
             
@@ -1027,7 +1215,7 @@
                 <span class="text-[10px] font-mono uppercase text-inkDim block">Outcome</span>
                 <span class="text-xs font-semibold text-ink">Clinical Data Fidelity & AI Readiness</span>
               </div>
-              <button onclick="openPracticeDrawer('digital')" class="w-9 h-9 rounded-full bg-canvasSubtle group-hover:bg-aurionTeal group-hover:text-white flex items-center justify-center text-ink transition-colors">
+              <button onclick="openPracticeDrawer('digital')" class="w-9 h-9 rounded-full bg-canvasSubtle group-hover:bg-aurionTeal group-hover:text-white flex items-center justify-center text-ink transition-colors hover:scale-110 transform">
                 <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
               </button>
             </div>
@@ -1035,17 +1223,16 @@
         </div>
 
         <!-- 7. Business Development, Brand & Commercial Advisory (Boardroom Commercial Planning) -->
-        <div class="executive-card md:col-start-auto lg:col-start-2 lg:col-span-2 rounded-3xl overflow-hidden flex flex-col justify-between shadow-executive hover:shadow-executive-hover group">
+        <div class="executive-card md:col-start-auto lg:col-start-2 lg:col-span-2 rounded-3xl overflow-hidden flex flex-col justify-between shadow-executive hover:shadow-executive-hover group reveal">
           <div class="h-64 overflow-hidden relative">
             <img src="capability-commercial-advisory.jpg" 
                  alt="Business Development, Brand & Commercial Advisory" 
-                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-95"
+                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-[0.92] saturate-[1.05]"
                  onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80';" />
-            <div class="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/25 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-bl from-ink/85 via-ink/25 to-transparent"></div>
             
-            <div class="absolute top-4 left-4 font-mono text-[11px] font-bold text-white bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-white/20 flex items-center space-x-1.5">
-              <i data-lucide="briefcase-business" class="w-3 h-3 text-aurionTeal-vibrant"></i>
-              <span>[ 07 ]</span>
+            <div class="absolute top-4 left-4 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex items-center justify-center shadow-md z-10">
+              <i data-lucide="briefcase-business" class="w-3.5 h-3.5 text-aurionTeal-glow"></i>
             </div>
             <span class="absolute top-4 right-4 px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-wider bg-canvasPure/90 text-ink font-bold backdrop-blur-md">COMMERCIAL GROWTH</span>
             
@@ -1075,7 +1262,7 @@
                 <span class="text-[10px] font-mono uppercase text-inkDim block">Outcome</span>
                 <span class="text-xs font-semibold text-ink">Stronger Market Position & Commercial Momentum</span>
               </div>
-              <button onclick="openPracticeDrawer('commercial')" class="w-9 h-9 rounded-full bg-canvasSubtle group-hover:bg-aurionTeal group-hover:text-white flex items-center justify-center text-ink transition-colors">
+              <button onclick="openPracticeDrawer('commercial')" class="w-9 h-9 rounded-full bg-canvasSubtle group-hover:bg-aurionTeal group-hover:text-white flex items-center justify-center text-ink transition-colors hover:scale-110 transform">
                 <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
               </button>
             </div>
@@ -1083,17 +1270,16 @@
         </div>
 
         <!-- 8. Healthcare Project Management & Corporate Training (PMO Governance & Capability Building) -->
-        <div class="executive-card lg:col-span-2 rounded-3xl overflow-hidden flex flex-col justify-between shadow-executive hover:shadow-executive-hover group">
+        <div class="executive-card lg:col-span-2 rounded-3xl overflow-hidden flex flex-col justify-between shadow-executive hover:shadow-executive-hover group reveal reveal-delay-1">
           <div class="h-64 overflow-hidden relative">
             <img src="capability-pmo-training.jpg" 
                  alt="Healthcare Project Management & Corporate Training" 
-                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-95"
+                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-[0.92] saturate-[1.05]"
                  onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1200&q=80';" />
             <div class="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/25 to-transparent"></div>
             
-            <div class="absolute top-4 left-4 font-mono text-[11px] font-bold text-white bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-white/20 flex items-center space-x-1.5">
-              <i data-lucide="clipboard-check" class="w-3 h-3 text-aurionTeal-vibrant"></i>
-              <span>[ 08 ]</span>
+            <div class="absolute top-4 left-4 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex items-center justify-center shadow-md z-10">
+              <i data-lucide="clipboard-check" class="w-3.5 h-3.5 text-aurionTeal-glow"></i>
             </div>
             <span class="absolute top-4 right-4 px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-wider bg-canvasPure/90 text-ink font-bold backdrop-blur-md">CAPABILITY BUILDING</span>
             
@@ -1123,7 +1309,7 @@
                 <span class="text-[10px] font-mono uppercase text-inkDim block">Outcome</span>
                 <span class="text-xs font-semibold text-ink">Institutional Capability & Execution Discipline</span>
               </div>
-              <button onclick="openPracticeDrawer('pmo')" class="w-9 h-9 rounded-full bg-canvasSubtle group-hover:bg-aurionTeal group-hover:text-white flex items-center justify-center text-ink transition-colors">
+              <button onclick="openPracticeDrawer('pmo')" class="w-9 h-9 rounded-full bg-canvasSubtle group-hover:bg-aurionTeal group-hover:text-white flex items-center justify-center text-ink transition-colors hover:scale-110 transform">
                 <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
               </button>
             </div>
@@ -1138,96 +1324,96 @@
   <!-- ================================================================= -->
   <!-- 5. APPROACH: 4-PHASE EXECUTIVE METHOD                             -->
   <!-- ================================================================= -->
-  <section id="approach" class="py-24 bg-canvas border-b border-canvasBorder relative bg-drafting-grid">
+  <section id="approach" class="py-28 bg-[#05080A] border-b border-white/10 relative bg-drafting-grid-dark overflow-hidden section-glow">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
       
-      <div class="max-w-3xl mb-16 space-y-3">
-        <div class="inline-flex items-center space-x-2 text-[10px] font-mono uppercase tracking-widest text-aurionTeal font-bold">
+      <div class="max-w-3xl mb-16 space-y-3 reveal">
+        <div class="inline-flex items-center space-x-2 text-[10px] font-mono uppercase tracking-widest text-aurionTeal-glow font-bold">
           <span class="w-1.5 h-1.5 rounded-full bg-aurionTeal"></span>
           <span>Delivery Framework</span>
         </div>
-        <h2 class="text-3xl sm:text-5xl font-serif font-bold text-ink tracking-tight">
+        <h2 class="text-3xl sm:text-5xl font-serif font-bold text-slate-100 tracking-tight">
           How We Partner
         </h2>
-        <p class="text-inkMuted text-sm sm:text-base leading-relaxed pt-1">
+        <p class="text-slate-200 text-sm sm:text-base leading-relaxed pt-1">
           A disciplined, four-phase engagement framework designed to translate high-level boardroom vision into measurable clinical and financial reality.
         </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6 phase-grid">
         
         <!-- Phase I -->
-        <div class="p-8 rounded-3xl bg-canvasPure border border-canvasBorder shadow-sm flex flex-col justify-between group hover:border-aurionTeal/40 transition-all">
+        <div class="phase-card watermark-I border-l-2 border-l-aurionTeal/30 p-8 rounded-3xl executive-card-dark border border-white/10 flex flex-col justify-between group transition-all reveal">
           <div>
             <div class="flex items-center justify-between mb-4">
-              <span class="w-9 h-9 rounded-xl bg-aurionTeal-light text-aurionTeal flex items-center justify-center font-bold">
+              <span class="w-9 h-9 rounded-xl bg-aurionTeal/20 text-aurionTeal-glow border border-aurionTeal/30 flex items-center justify-center font-bold">
                 <i data-lucide="compass" class="w-4 h-4"></i>
               </span>
-              <span class="font-mono text-xs font-bold text-inkDim uppercase tracking-wider">[ Phase I ]</span>
+              
             </div>
-            <h3 class="text-lg font-bold text-ink mb-2 font-serif">Diagnose & Align</h3>
-            <p class="text-xs text-inkMuted leading-relaxed">
+            <h3 class="text-lg font-bold text-slate-100 mb-2 font-serif">Diagnose & Align</h3>
+            <p class="text-xs text-slate-200 leading-relaxed">
               Rapid, evidence-based diagnostic sprints engaging board chairs, medical directors, and finance leads to isolate systemic bottlenecks and quantify growth opportunities.
             </p>
           </div>
-          <div class="mt-6 pt-4 border-t border-canvasBorder text-[11px] font-mono text-aurionTeal font-semibold">
+          <div class="mt-6 pt-4 border-t border-white/10 text-[11px] font-mono text-aurionTeal-glow font-semibold">
             Deliverable: Diagnostic Memo & Audit
           </div>
         </div>
 
         <!-- Phase II -->
-        <div class="p-8 rounded-3xl bg-canvasPure border border-canvasBorder shadow-sm flex flex-col justify-between group hover:border-aurionTeal/40 transition-all">
+        <div class="phase-card watermark-II border-l-2 border-l-aurionTeal/50 p-8 rounded-3xl executive-card-dark border border-white/10 flex flex-col justify-between group transition-all reveal reveal-delay-1">
           <div>
             <div class="flex items-center justify-between mb-4">
-              <span class="w-9 h-9 rounded-xl bg-aurionTeal-light text-aurionTeal flex items-center justify-center font-bold">
+              <span class="w-9 h-9 rounded-xl bg-aurionTeal/20 text-aurionTeal-glow border border-aurionTeal/30 flex items-center justify-center font-bold">
                 <i data-lucide="git-merge" class="w-4 h-4"></i>
               </span>
-              <span class="font-mono text-xs font-bold text-inkDim uppercase tracking-wider">[ Phase II ]</span>
+              
             </div>
-            <h3 class="text-lg font-bold text-ink mb-2 font-serif">Architect & Plan</h3>
-            <p class="text-xs text-inkMuted leading-relaxed">
+            <h3 class="text-lg font-bold text-slate-100 mb-2 font-serif">Architect & Plan</h3>
+            <p class="text-xs text-slate-200 leading-relaxed">
               Formulating board-ready target operating models, cross-border corridor pathways, or spatial designs with phased, actionable 18-24 month execution roadmaps.
             </p>
           </div>
-          <div class="mt-6 pt-4 border-t border-canvasBorder text-[11px] font-mono text-aurionTeal font-semibold">
+          <div class="mt-6 pt-4 border-t border-white/10 text-[11px] font-mono text-aurionTeal-glow font-semibold">
             Deliverable: Board Strategy Blueprint
           </div>
         </div>
 
         <!-- Phase III -->
-        <div class="p-8 rounded-3xl bg-canvasPure border border-canvasBorder shadow-sm flex flex-col justify-between group hover:border-aurionTeal/40 transition-all">
+        <div class="phase-card watermark-III border-l-2 border-l-aurionTeal/70 p-8 rounded-3xl executive-card-dark border border-white/10 flex flex-col justify-between group transition-all reveal reveal-delay-2">
           <div>
             <div class="flex items-center justify-between mb-4">
-              <span class="w-9 h-9 rounded-xl bg-aurionTeal-light text-aurionTeal flex items-center justify-center font-bold">
+              <span class="w-9 h-9 rounded-xl bg-aurionTeal/20 text-aurionTeal-glow border border-aurionTeal/30 flex items-center justify-center font-bold">
                 <i data-lucide="zap" class="w-4 h-4"></i>
               </span>
-              <span class="font-mono text-xs font-bold text-inkDim uppercase tracking-wider">[ Phase III ]</span>
+              
             </div>
-            <h3 class="text-lg font-bold text-ink mb-2 font-serif">Mobilize & Execute</h3>
-            <p class="text-xs text-inkMuted leading-relaxed">
+            <h3 class="text-lg font-bold text-slate-100 mb-2 font-serif">Mobilize & Execute</h3>
+            <p class="text-xs text-slate-200 leading-relaxed">
               Direct partner oversight of PMO cadence, clinical SOP adoption, vendor alignment, and bilateral government/payer agreements to drive sustained velocity.
             </p>
           </div>
-          <div class="mt-6 pt-4 border-t border-canvasBorder text-[11px] font-mono text-aurionTeal font-semibold">
+          <div class="mt-6 pt-4 border-t border-white/10 text-[11px] font-mono text-aurionTeal-glow font-semibold">
             Deliverable: PMO & Governance Cadence
           </div>
         </div>
 
         <!-- Phase IV -->
-        <div class="p-8 rounded-3xl bg-canvasPure border border-canvasBorder shadow-sm flex flex-col justify-between group hover:border-aurionTeal/40 transition-all">
+        <div class="phase-card watermark-IV border-l-2 border-l-aurionTeal p-8 rounded-3xl executive-card-dark border border-white/10 flex flex-col justify-between group transition-all reveal reveal-delay-3">
           <div>
             <div class="flex items-center justify-between mb-4">
-              <span class="w-9 h-9 rounded-xl bg-aurionTeal-light text-aurionTeal flex items-center justify-center font-bold">
+              <span class="w-9 h-9 rounded-xl bg-aurionTeal/20 text-aurionTeal-glow border border-aurionTeal/30 flex items-center justify-center font-bold">
                 <i data-lucide="award" class="w-4 h-4"></i>
               </span>
-              <span class="font-mono text-xs font-bold text-inkDim uppercase tracking-wider">[ Phase IV ]</span>
+              
             </div>
-            <h3 class="text-lg font-bold text-ink mb-2 font-serif">Realize & Sustain</h3>
-            <p class="text-xs text-inkMuted leading-relaxed">
+            <h3 class="text-lg font-bold text-slate-100 mb-2 font-serif">Realize & Sustain</h3>
+            <p class="text-xs text-slate-200 leading-relaxed">
               Tracking realized clinical throughput, foreign patient revenue, and operational velocity against baseline KPIs, transferring internal capabilities to client leadership.
             </p>
           </div>
-          <div class="mt-6 pt-4 border-t border-canvasBorder text-[11px] font-mono text-aurionTeal font-semibold">
+          <div class="mt-6 pt-4 border-t border-white/10 text-[11px] font-mono text-aurionTeal-glow font-semibold">
             Deliverable: Benefits Realization & Handover
           </div>
         </div>
@@ -1243,7 +1429,7 @@
   <section id="sectors" class="py-24 bg-canvasPure border-b border-canvasBorder relative">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
       
-      <div class="max-w-3xl mb-16 space-y-3">
+      <div class="max-w-3xl mb-16 space-y-3 reveal">
         <div class="inline-flex items-center space-x-2 text-[10px] font-mono uppercase tracking-widest text-aurionTeal font-bold">
           <span class="w-1.5 h-1.5 rounded-full bg-aurionTeal"></span>
           <span>Institutional Sectors</span>
@@ -1259,8 +1445,8 @@
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         
         <!-- Sector 01: Private Hospital Networks -->
-        <div class="rounded-3xl bg-canvas border border-canvasBorder hover:border-aurionTeal/40 transition-all shadow-sm overflow-hidden flex flex-col justify-between group">
-          <div class="h-36 overflow-hidden relative">
+        <div class="rounded-3xl executive-card overflow-hidden flex flex-col justify-between group reveal">
+          <div class="h-44 overflow-hidden relative">
             <img src="https://images.unsplash.com/photo-1587351021759-3e566b6af7cc?auto=format&fit=crop&w=600&q=80" 
                  alt="Hospital Network Architecture" 
                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
@@ -1284,8 +1470,8 @@
         </div>
 
         <!-- Sector 02: Sovereign Health Entities -->
-        <div class="rounded-3xl bg-canvas border border-canvasBorder hover:border-aurionTeal/40 transition-all shadow-sm overflow-hidden flex flex-col justify-between group">
-          <div class="h-36 overflow-hidden relative">
+        <div class="rounded-3xl executive-card overflow-hidden flex flex-col justify-between group reveal reveal-delay-1">
+          <div class="h-44 overflow-hidden relative">
             <img src="sector-sovereign-health.jpg" 
                  alt="Sovereign Health Entities" 
                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
@@ -1310,8 +1496,8 @@
         </div>
 
         <!-- Sector 03: Healthcare Investors & PE -->
-        <div class="rounded-3xl bg-canvas border border-canvasBorder hover:border-aurionTeal/40 transition-all shadow-sm overflow-hidden flex flex-col justify-between group">
-          <div class="h-36 overflow-hidden relative">
+        <div class="rounded-3xl executive-card overflow-hidden flex flex-col justify-between group reveal reveal-delay-2">
+          <div class="h-44 overflow-hidden relative">
             <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80" 
                  alt="Healthcare Capital Allocators" 
                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
@@ -1335,8 +1521,8 @@
         </div>
 
         <!-- Sector 04: Aesthetic & Longevity Clinics -->
-        <div class="rounded-3xl bg-canvas border border-canvasBorder hover:border-aurionTeal/40 transition-all shadow-sm overflow-hidden flex flex-col justify-between group">
-          <div class="h-36 overflow-hidden relative">
+        <div class="rounded-3xl executive-card overflow-hidden flex flex-col justify-between group reveal reveal-delay-3">
+          <div class="h-44 overflow-hidden relative">
             <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=600&q=80" 
                  alt="Luxury Longevity & Aesthetics" 
                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
@@ -1367,18 +1553,18 @@
   <!-- ================================================================= -->
   <!-- 7. MANDATES: SELECTED ENGAGEMENT HIGHLIGHTS                       -->
   <!-- ================================================================= -->
-  <section id="mandates" class="py-24 bg-canvas border-b border-canvasBorder relative bg-drafting-grid">
+  <section id="mandates" class="py-28 bg-[#070A0D] border-b border-white/10 relative overflow-hidden section-glow">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
       
-      <div class="max-w-3xl mb-16 space-y-3">
-        <div class="inline-flex items-center space-x-2 text-[10px] font-mono uppercase tracking-widest text-aurionTeal font-bold">
+      <div class="max-w-3xl mb-16 space-y-3 reveal">
+        <div class="inline-flex items-center space-x-2 text-[10px] font-mono uppercase tracking-widest text-aurionTeal-glow font-bold">
           <span class="w-1.5 h-1.5 rounded-full bg-aurionTeal"></span>
           <span>Illustrative Scenarios</span>
         </div>
-        <h2 class="text-3xl sm:text-5xl font-serif font-bold text-ink tracking-tight">
+        <h2 class="text-3xl sm:text-5xl font-serif font-bold text-slate-100 tracking-tight">
           How We'd Approach a Mandate
         </h2>
-        <p class="text-inkMuted text-sm sm:text-base leading-relaxed pt-1">
+        <p class="text-slate-200 text-sm sm:text-base leading-relaxed pt-1">
           Illustrative scenarios only , not completed engagements , showing how our senior-only advisory approach would translate strategic ambition into institutional performance.
         </p>
       </div>
@@ -1386,71 +1572,71 @@
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         
         <!-- Mandate 1 -->
-        <div class="p-8 rounded-3xl bg-canvasPure border border-canvasBorder shadow-executive flex flex-col justify-between">
+        <div class="p-8 rounded-3xl executive-card-dark mandate-watermark-1 border border-white/10 flex flex-col justify-between reveal">
           <div>
             <div class="flex items-center justify-between text-xs font-mono mb-4">
-              <span class="inline-flex items-center space-x-1.5 text-aurionTeal font-bold">
+              <span class="inline-flex items-center space-x-1.5 text-aurionTeal-glow font-bold">
                 <i data-lucide="trending-up" class="w-3.5 h-3.5"></i>
                 <span>Strategy & TOM</span>
               </span>
-              <span class="px-2.5 py-1 rounded-full bg-canvasSubtle text-[10px] font-mono text-inkDim font-semibold">18-24 Mo Scope</span>
+              <span class="px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] font-mono text-slate-300 font-semibold">18-24 Mo Scope</span>
             </div>
-            <h3 class="text-lg font-bold text-ink mb-3 leading-snug font-serif">
+            <h3 class="text-lg font-bold text-slate-100 mb-3 leading-snug font-serif">
               Strategic Transformation for a Multi-Site Hospital Network
             </h3>
-            <p class="text-xs text-inkMuted leading-relaxed mb-4">
+            <p class="text-xs text-slate-200 leading-relaxed mb-4">
               Comprehensive diagnostic sprint pressure-testing clinical service-line profitability across three facilities ahead of institutional capital expansion.
             </p>
           </div>
           <div class="pt-4 border-t border-canvasBorder">
-            <span class="text-[10px] font-mono text-aurionTeal uppercase font-bold block">Target Outcome</span>
-            <p class="text-xs text-ink font-semibold mt-0.5">Board-aligned 24-month roadmap & validated investment business case.</p>
+            <span class="text-[10px] font-mono text-aurionTeal-glow uppercase font-bold block">Target Outcome</span>
+            <p class="text-xs text-slate-100 font-semibold mt-0.5">Board-aligned 24-month roadmap & validated investment business case.</p>
           </div>
         </div>
 
         <!-- Mandate 2 -->
-        <div class="p-8 rounded-3xl bg-canvasPure border border-canvasBorder shadow-executive flex flex-col justify-between border-aurionTeal/30">
+        <div class="p-8 rounded-3xl executive-card-dark mandate-watermark-2 border border-aurionTeal/40 flex flex-col justify-between reveal reveal-delay-1">
           <div>
             <div class="flex items-center justify-between text-xs font-mono mb-4">
-              <span class="inline-flex items-center space-x-1.5 text-aurionTeal font-bold">
+              <span class="inline-flex items-center space-x-1.5 text-aurionTeal-glow font-bold">
                 <i data-lucide="plane" class="w-3.5 h-3.5"></i>
                 <span>Medical Tourism</span>
               </span>
-              <span class="px-2.5 py-1 rounded-full bg-aurionTeal-light text-[10px] font-mono text-aurionTeal-dark font-bold">Bilateral Corridor</span>
+              <span class="px-2.5 py-1 rounded-full bg-aurionTeal/20 border border-aurionTeal/40 text-[10px] font-mono text-aurionTeal-glow font-bold">Bilateral Corridor</span>
             </div>
-            <h3 class="text-lg font-bold text-ink mb-3 leading-snug font-serif">
+            <h3 class="text-lg font-bold text-slate-100 mb-3 leading-snug font-serif">
               Turnkey International Patient Department & SMO Gateway
             </h3>
-            <p class="text-xs text-inkMuted leading-relaxed mb-4">
+            <p class="text-xs text-slate-200 leading-relaxed mb-4">
               Structuring inbound patient travel corridors, cross-border payer contracting, and a digital Second Medical Opinion triage network.
             </p>
           </div>
           <div class="pt-4 border-t border-canvasBorder">
-            <span class="text-[10px] font-mono text-aurionTeal uppercase font-bold block">Target Outcome</span>
-            <p class="text-xs text-ink font-semibold mt-0.5">Active regional referral channel & foreign-currency revenue capture.</p>
+            <span class="text-[10px] font-mono text-aurionTeal-glow uppercase font-bold block">Target Outcome</span>
+            <p class="text-xs text-slate-100 font-semibold mt-0.5">Active regional referral channel & foreign-currency revenue capture.</p>
           </div>
         </div>
 
         <!-- Mandate 3 -->
-        <div class="p-8 rounded-3xl bg-canvasPure border border-canvasBorder shadow-executive flex flex-col justify-between">
+        <div class="p-8 rounded-3xl executive-card-dark mandate-watermark-3 border border-white/10 flex flex-col justify-between reveal reveal-delay-2">
           <div>
             <div class="flex items-center justify-between text-xs font-mono mb-4">
-              <span class="inline-flex items-center space-x-1.5 text-aurionTeal font-bold">
+              <span class="inline-flex items-center space-x-1.5 text-aurionTeal-glow font-bold">
                 <i data-lucide="gem" class="w-3.5 h-3.5"></i>
                 <span>Prestige Architecture</span>
               </span>
-              <span class="px-2.5 py-1 rounded-full bg-canvasSubtle text-[10px] font-mono text-inkDim font-semibold">5-Star Luxury</span>
+              <span class="px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] font-mono text-slate-300 font-semibold">5-Star Luxury</span>
             </div>
-            <h3 class="text-lg font-bold text-ink mb-3 leading-snug font-serif">
+            <h3 class="text-lg font-bold text-slate-100 mb-3 leading-snug font-serif">
               Prestige Aesthetics & Wellness Clinic Architecture
             </h3>
-            <p class="text-xs text-inkMuted leading-relaxed mb-4">
+            <p class="text-xs text-slate-200 leading-relaxed mb-4">
               Concept feasibility, interior spatial direction, and concierge workflow curation fusing accredited infection control with five-star hospitality.
             </p>
           </div>
           <div class="pt-4 border-t border-canvasBorder">
-            <span class="text-[10px] font-mono text-aurionTeal uppercase font-bold block">Target Outcome</span>
-            <p class="text-xs text-ink font-semibold mt-0.5">Launch-ready flagship facility commanding top-tier private-pay margins.</p>
+            <span class="text-[10px] font-mono text-aurionTeal-glow uppercase font-bold block">Target Outcome</span>
+            <p class="text-xs text-slate-100 font-semibold mt-0.5">Launch-ready flagship facility commanding top-tier private-pay margins.</p>
           </div>
         </div>
 
@@ -1467,7 +1653,7 @@
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
       
       <!-- Section Introduction -->
-      <div class="max-w-3xl mb-16 space-y-3">
+      <div class="max-w-3xl mb-16 space-y-3 reveal">
         <div class="inline-flex items-center space-x-2 text-[10px] font-mono uppercase tracking-widest text-aurionTeal font-bold">
           <span class="w-1.5 h-1.5 rounded-full bg-aurionTeal animate-pulse"></span>
           <span>THE FOUNDERS</span>
@@ -1484,10 +1670,10 @@
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 max-w-6xl mx-auto items-stretch">
         
         <!-- Dr. Asser Medhat: Executive Card -->
-        <div class="executive-card rounded-3xl p-7 sm:p-9 lg:p-10 shadow-executive bg-canvas border border-canvasBorder hover:border-aurionTeal/40 hover:shadow-executive-hover transition-all duration-300 flex flex-col justify-between group">
+        <div class="executive-card rounded-3xl p-7 sm:p-9 lg:p-10 shadow-executive bg-canvas border border-canvasBorder hover:border-aurionTeal/40 hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group reveal">
           <div>
             <div class="flex flex-col sm:flex-row items-start sm:items-center gap-5 sm:gap-6 mb-6">
-              <div class="w-28 h-28 sm:w-32 sm:h-32 rounded-2xl overflow-hidden border-2 border-aurionTeal/25 shadow-sm shrink-0 bg-canvasSubtle relative group-hover:border-aurionTeal/50 transition-colors duration-300">
+              <div class="w-28 h-28 sm:w-32 sm:h-32 rounded-2xl overflow-hidden border-2 border-aurionTeal/40 shadow-lg shrink-0 bg-canvasSubtle relative group-hover:border-aurionTeal/50 transition-colors duration-300">
                 <img src="dr-asser-medhat.png" 
                      alt="Dr. Asser Medhat" 
                      class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 filter contrast-[1.02]"
@@ -1520,19 +1706,19 @@
               Core Strategic Mandates
             </div>
             <div class="space-y-2.5 mb-6 text-xs font-sans text-ink">
-              <div class="flex items-start space-x-2.5">
+              <div class="flex items-start space-x-2.5 py-0.5">
                 <span class="w-4 h-4 rounded-full bg-aurionTeal-light text-aurionTeal flex items-center justify-center shrink-0 mt-0.5 shadow-2xs">
                   <i data-lucide="check" class="w-2.5 h-2.5 text-aurionTeal"></i>
                 </span>
                 <span class="leading-snug text-inkMuted font-medium">Healthcare Strategy, Operations &amp; Performance Transformation</span>
               </div>
-              <div class="flex items-start space-x-2.5">
+              <div class="flex items-start space-x-2.5 py-0.5">
                 <span class="w-4 h-4 rounded-full bg-aurionTeal-light text-aurionTeal flex items-center justify-center shrink-0 mt-0.5 shadow-2xs">
                   <i data-lucide="check" class="w-2.5 h-2.5 text-aurionTeal"></i>
                 </span>
                 <span class="leading-snug text-inkMuted font-medium">Digital Health, Telehealth &amp; Healthcare PMO</span>
               </div>
-              <div class="flex items-start space-x-2.5">
+              <div class="flex items-start space-x-2.5 py-0.5">
                 <span class="w-4 h-4 rounded-full bg-aurionTeal-light text-aurionTeal flex items-center justify-center shrink-0 mt-0.5 shadow-2xs">
                   <i data-lucide="check" class="w-2.5 h-2.5 text-aurionTeal"></i>
                 </span>
@@ -1552,10 +1738,10 @@
         </div>
 
         <!-- Dr. Asmaa Salman: Executive Card -->
-        <div class="executive-card rounded-3xl p-7 sm:p-9 lg:p-10 shadow-executive bg-canvas border border-canvasBorder hover:border-aurionTeal/40 hover:shadow-executive-hover transition-all duration-300 flex flex-col justify-between group">
+        <div class="executive-card rounded-3xl p-7 sm:p-9 lg:p-10 shadow-executive bg-canvas border border-canvasBorder hover:border-aurionTeal/40 hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group reveal reveal-delay-1">
           <div>
             <div class="flex flex-col sm:flex-row items-start sm:items-center gap-5 sm:gap-6 mb-6">
-              <div class="w-28 h-28 sm:w-32 sm:h-32 rounded-2xl overflow-hidden border-2 border-aurionTeal/25 shadow-sm shrink-0 bg-canvasSubtle relative group-hover:border-aurionTeal/50 transition-colors duration-300">
+              <div class="w-28 h-28 sm:w-32 sm:h-32 rounded-2xl overflow-hidden border-2 border-aurionTeal/40 shadow-lg shrink-0 bg-canvasSubtle relative group-hover:border-aurionTeal/50 transition-colors duration-300">
                 <img src="dr-asmaa-salman.png" 
                      alt="Dr. Asmaa Salman" 
                      class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 filter contrast-[1.02]"
@@ -1588,19 +1774,19 @@
               Core Strategic Mandates
             </div>
             <div class="space-y-2.5 mb-6 text-xs font-sans text-ink">
-              <div class="flex items-start space-x-2.5">
+              <div class="flex items-start space-x-2.5 py-0.5">
                 <span class="w-4 h-4 rounded-full bg-aurionTeal-light text-aurionTeal flex items-center justify-center shrink-0 mt-0.5 shadow-2xs">
                   <i data-lucide="check" class="w-2.5 h-2.5 text-aurionTeal"></i>
                 </span>
                 <span class="leading-snug text-inkMuted font-medium">Strategic Marketing, Commercial Growth &amp; Business Development</span>
               </div>
-              <div class="flex items-start space-x-2.5">
+              <div class="flex items-start space-x-2.5 py-0.5">
                 <span class="w-4 h-4 rounded-full bg-aurionTeal-light text-aurionTeal flex items-center justify-center shrink-0 mt-0.5 shadow-2xs">
                   <i data-lucide="check" class="w-2.5 h-2.5 text-aurionTeal"></i>
                 </span>
                 <span class="leading-snug text-inkMuted font-medium">Healthcare Branding, Destination Marketing &amp; Patient Experience</span>
               </div>
-              <div class="flex items-start space-x-2.5">
+              <div class="flex items-start space-x-2.5 py-0.5">
                 <span class="w-4 h-4 rounded-full bg-aurionTeal-light text-aurionTeal flex items-center justify-center shrink-0 mt-0.5 shadow-2xs">
                   <i data-lucide="check" class="w-2.5 h-2.5 text-aurionTeal"></i>
                 </span>
@@ -1627,44 +1813,44 @@
   <!-- ================================================================= -->
   <!-- 9. CONTACT: EXECUTIVE INQUIRY                                     -->
   <!-- ================================================================= -->
-  <section id="contact" class="py-24 bg-canvas border-b border-canvasBorder relative bg-drafting-grid">
+  <section id="contact" class="py-28 bg-[#06090D] border-b border-white/10 relative overflow-hidden bg-drafting-grid-dark section-glow">
     <div class="max-w-4xl mx-auto px-6 sm:px-8">
       
-      <div class="max-w-3xl mb-14 space-y-3 text-center mx-auto">
-        <div class="inline-flex items-center space-x-2 text-[10px] font-mono uppercase tracking-widest text-aurionTeal font-bold">
+      <div class="max-w-3xl mb-14 space-y-3 text-center mx-auto reveal">
+        <div class="inline-flex items-center space-x-2 text-[10px] font-mono uppercase tracking-widest text-aurionTeal-glow font-bold">
           <span class="w-1.5 h-1.5 rounded-full bg-aurionTeal"></span>
           <span>Confidential Advisory</span>
         </div>
-        <h2 class="text-3xl sm:text-5xl font-serif font-bold text-ink tracking-tight">
+        <h2 class="text-3xl sm:text-5xl font-serif font-bold text-slate-100 tracking-tight">
           Schedule an Executive Consultation
         </h2>
-        <p class="text-inkMuted text-sm sm:text-base leading-relaxed pt-1">
+        <p class="text-slate-200 text-sm sm:text-base leading-relaxed pt-1">
           Direct correspondence with managing partners Dr. Asser Medhat and Dr. Asmaa Salman.
         </p>
       </div>
 
-      <div class="executive-card p-8 sm:p-12 rounded-3xl shadow-executive-hover border border-canvasBorder">
+      <div class="p-8 sm:p-12 rounded-3xl shadow-2xl relative overflow-hidden bg-[#0C1117] border border-white/10 backdrop-blur-xl">
         <form id="inquiryForm" onsubmit="handleFormSubmission(event)" class="space-y-6">
           
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div>
-              <label class="block text-xs font-mono uppercase tracking-wider text-ink font-semibold mb-2">Executive Name & Title</label>
-              <input type="text" required placeholder="Dr. / Board Member / CEO" class="w-full px-4 py-3 rounded-xl bg-canvas border border-canvasBorder text-ink text-sm focus:border-aurionTeal focus:bg-canvasPure focus:outline-none transition-colors" />
+              <label class="block text-xs font-mono uppercase tracking-wider text-slate-100 font-semibold mb-2">Executive Name & Title</label>
+              <input type="text" required placeholder="Dr. / Board Member / CEO" class="w-full px-4 py-3.5 rounded-xl bg-[#141B22] border border-white/10 text-white text-sm placeholder-slate-500 focus:border-aurionTeal focus:ring-2 focus:ring-aurionTeal/30 focus:bg-[#1A222B] focus:outline-none transition-all" />
             </div>
             <div>
-              <label class="block text-xs font-mono uppercase tracking-wider text-ink font-semibold mb-2">Corporate Email</label>
-              <input type="email" required placeholder="executive@institution.com" class="w-full px-4 py-3 rounded-xl bg-canvas border border-canvasBorder text-ink text-sm focus:border-aurionTeal focus:bg-canvasPure focus:outline-none transition-colors" />
+              <label class="block text-xs font-mono uppercase tracking-wider text-slate-100 font-semibold mb-2">Corporate Email</label>
+              <input type="email" required placeholder="executive@institution.com" class="w-full px-4 py-3.5 rounded-xl bg-[#141B22] border border-white/10 text-white text-sm placeholder-slate-500 focus:border-aurionTeal focus:ring-2 focus:ring-aurionTeal/30 focus:bg-[#1A222B] focus:outline-none transition-all" />
             </div>
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div>
-              <label class="block text-xs font-mono uppercase tracking-wider text-ink font-semibold mb-2">Institution / Organization</label>
-              <input type="text" required placeholder="Hospital Network / Authority / PE Fund" class="w-full px-4 py-3 rounded-xl bg-canvas border border-canvasBorder text-ink text-sm focus:border-aurionTeal focus:bg-canvasPure focus:outline-none transition-colors" />
+              <label class="block text-xs font-mono uppercase tracking-wider text-slate-100 font-semibold mb-2">Institution / Organization</label>
+              <input type="text" required placeholder="Hospital Network / Authority / PE Fund" class="w-full px-4 py-3.5 rounded-xl bg-[#141B22] border border-white/10 text-white text-sm placeholder-slate-500 focus:border-aurionTeal focus:ring-2 focus:ring-aurionTeal/30 focus:bg-[#1A222B] focus:outline-none transition-all" />
             </div>
             <div>
-              <label class="block text-xs font-mono uppercase tracking-wider text-ink font-semibold mb-2">Advisory Area of Interest</label>
-              <select class="w-full px-4 py-3 rounded-xl bg-canvas border border-canvasBorder text-ink text-sm focus:border-aurionTeal focus:bg-canvasPure focus:outline-none transition-colors">
+              <label class="block text-xs font-mono uppercase tracking-wider text-slate-100 font-semibold mb-2">Advisory Area of Interest</label>
+              <select class="w-full px-4 py-3.5 rounded-xl bg-[#141B22] border border-white/10 text-white text-sm focus:border-aurionTeal focus:ring-2 focus:ring-aurionTeal/30 focus:bg-[#1A222B] focus:outline-none transition-all">
                 <option>International Patient Services, Medical Tourism & Telehealth (Flagship)</option>
                 <option>Strategy & System Transformation</option>
                 <option>Operations & Throughput Turnaround</option>
@@ -1678,11 +1864,11 @@
           </div>
 
           <div>
-            <label class="block text-xs font-mono uppercase tracking-wider text-ink font-semibold mb-2">Strategic Context</label>
-            <textarea rows="4" placeholder="Briefly articulate your transformation objectives, cross-border goals, or institutional scope..." class="w-full px-4 py-3 rounded-xl bg-canvas border border-canvasBorder text-ink text-sm focus:border-aurionTeal focus:bg-canvasPure focus:outline-none transition-colors"></textarea>
+            <label class="block text-xs font-mono uppercase tracking-wider text-slate-100 font-semibold mb-2">Strategic Context</label>
+            <textarea rows="4" placeholder="Briefly articulate your transformation objectives, cross-border goals, or institutional scope..." class="w-full px-4 py-3.5 rounded-xl bg-[#141B22] border border-white/10 text-white text-sm placeholder-slate-500 focus:border-aurionTeal focus:ring-2 focus:ring-aurionTeal/30 focus:bg-[#1A222B] focus:outline-none transition-all"></textarea>
           </div>
 
-          <button type="submit" class="w-full py-4 rounded-full bg-aurionTeal hover:bg-aurionTeal-dark text-white font-mono text-xs font-bold uppercase tracking-wider shadow-executive transition-all flex items-center justify-center space-x-2">
+          <button type="submit" class="w-full py-4 rounded-full bg-gradient-to-r from-aurionTeal to-aurionTeal-glow hover:brightness-110 text-noir font-mono text-xs font-bold uppercase tracking-wider shadow-glow-teal hover:scale-[1.01] transform transition-all flex items-center justify-center space-x-2">
             <span>Transmit Executive Consultation Request</span>
             <i data-lucide="send" class="w-4 h-4"></i>
           </button>
@@ -1692,8 +1878,8 @@
           <div class="w-14 h-14 rounded-full bg-aurionTeal-light border border-aurionTeal text-aurionTeal flex items-center justify-center mx-auto">
             <i data-lucide="check" class="w-7 h-7"></i>
           </div>
-          <h3 class="text-2xl font-serif font-bold text-ink">Inquiry Received</h3>
-          <p class="text-inkMuted text-sm max-w-md mx-auto">
+          <h3 class="text-2xl font-serif font-bold text-slate-100">Inquiry Received</h3>
+          <p class="text-slate-200 text-sm max-w-md mx-auto">
             Your request has been securely transmitted to managing partners Dr. Asser Medhat and Dr. Asmaa Salman. You will receive an executive response within 24 hours.
           </p>
         </div>
@@ -1705,38 +1891,38 @@
   <!-- ================================================================= -->
   <!-- 10. FOOTER                                                        -->
   <!-- ================================================================= -->
-  <footer class="bg-black border-t border-white/10 py-16">
+  <footer class="bg-black border-t border-white/10 py-16 footer-glow">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
       <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-12">
         <div class="md:col-span-5 space-y-4">
           <a href="#" class="inline-block">
             <img src="Aurion-Logo-transparent.png" 
                  alt="Aurion Health Advisory" 
-                 class="h-20 md:h-24 w-auto object-contain"
+                 class="h-20 md:h-24 w-auto object-contain hover:drop-shadow-[0_0_15px_rgba(27,138,158,0.3)] transition-all duration-500"
                  onerror="this.onerror=null; this.src='Aurion-Logo.png'; if(!this.src) this.src='Aurion-Logo.jpeg';" />
           </a>
-          <p class="text-xs text-slate-400 max-w-sm leading-relaxed mt-2">
+          <p class="text-xs text-slate-200 max-w-sm leading-relaxed mt-2">
             The bridge between strategy and results. An elite boutique healthcare advisory practice integrating board strategy, cross-border patient corridors, and next-generation clinical ecosystems.
           </p>
         </div>
 
         <div class="md:col-span-4 space-y-3">
           <div class="text-xs font-mono uppercase tracking-widest text-white font-bold">Capabilities</div>
-          <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-400 font-mono">
-            <li><button onclick="openPracticeDrawer('ips')" class="hover:text-aurionTeal-vibrant transition-colors text-left">★ International Corridors</button></li>
-            <li><button onclick="openPracticeDrawer('strategy')" class="hover:text-aurionTeal-vibrant transition-colors text-left">Strategy & Transformation</button></li>
-            <li><button onclick="openPracticeDrawer('ops')" class="hover:text-aurionTeal-vibrant transition-colors text-left">Operations & Turnaround</button></li>
-            <li><button onclick="openPracticeDrawer('spaces')" class="hover:text-aurionTeal-vibrant transition-colors text-left">Elite Aesthetics &amp; Wellness Design</button></li>
-            <li><button onclick="openPracticeDrawer('events')" class="hover:text-aurionTeal-vibrant transition-colors text-left">Mega Events Management</button></li>
-            <li><button onclick="openPracticeDrawer('digital')" class="hover:text-aurionTeal-vibrant transition-colors text-left">Digital Health Informatics</button></li>
-            <li><button onclick="openPracticeDrawer('commercial')" class="hover:text-aurionTeal-vibrant transition-colors text-left">Business Development, Brand & Commercial Advisory</button></li>
-            <li><button onclick="openPracticeDrawer('pmo')" class="hover:text-aurionTeal-vibrant transition-colors text-left">Healthcare Project Management & Corporate Training</button></li>
+          <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-200 font-mono">
+            <li><button onclick="openPracticeDrawer('ips')" class="hover:text-aurionTeal-glow transition-colors text-left">★ International Corridors</button></li>
+            <li><button onclick="openPracticeDrawer('strategy')" class="hover:text-aurionTeal-glow transition-colors text-left">Strategy & Transformation</button></li>
+            <li><button onclick="openPracticeDrawer('ops')" class="hover:text-aurionTeal-glow transition-colors text-left">Operations & Turnaround</button></li>
+            <li><button onclick="openPracticeDrawer('spaces')" class="hover:text-aurionTeal-glow transition-colors text-left">Elite Aesthetics &amp; Wellness Design</button></li>
+            <li><button onclick="openPracticeDrawer('events')" class="hover:text-aurionTeal-glow transition-colors text-left">Mega Events Management</button></li>
+            <li><button onclick="openPracticeDrawer('digital')" class="hover:text-aurionTeal-glow transition-colors text-left">Digital Health Informatics</button></li>
+            <li><button onclick="openPracticeDrawer('commercial')" class="hover:text-aurionTeal-glow transition-colors text-left">Business Development, Brand & Commercial Advisory</button></li>
+            <li><button onclick="openPracticeDrawer('pmo')" class="hover:text-aurionTeal-glow transition-colors text-left">Healthcare Project Management & Corporate Training</button></li>
           </ul>
         </div>
 
         <div class="md:col-span-3 space-y-3">
           <div class="text-xs font-mono uppercase tracking-widest text-white font-bold">Regional Presence</div>
-          <p class="text-xs text-slate-400 leading-relaxed font-mono">
+          <p class="text-xs text-slate-200 leading-relaxed font-mono">
             Operating Headquarters: Cairo, Egypt.<br />
             Regional Corridors: Saudi Arabia, UAE & GCC.
           </p>
@@ -1746,7 +1932,7 @@
         </div>
       </div>
 
-      <div class="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-[11px] font-mono text-slate-400 gap-4">
+      <div class="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-[11px] font-mono text-slate-200 gap-4">
         <div>
           © 2026 Aurion Health Advisory. All Rights Reserved.
         </div>
@@ -1793,6 +1979,18 @@
   <script>
     lucide.createIcons();
 
+    // Scroll-reveal animation observer
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
     const mainNav = document.getElementById('mainNav');
     if (mainNav) {
       window.addEventListener('scroll', () => {
@@ -1821,10 +2019,16 @@
     const mobileMenu = document.getElementById('mobileMenu');
     if (mobileNavToggle && mobileMenu) {
       mobileNavToggle.addEventListener('click', () => {
-        mobileMenu.classList.toggle('hidden');
+        if (mobileMenu.classList.contains('hidden')) {
+          mobileMenu.classList.remove('hidden');
+          requestAnimationFrame(() => mobileMenu.classList.add('mobile-open'));
+        } else {
+          mobileMenu.classList.remove('mobile-open');
+          setTimeout(() => mobileMenu.classList.add('hidden'), 400);
+        }
       });
       mobileMenu.querySelectorAll('a').forEach(a => {
-        a.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+        a.addEventListener('click', () => { mobileMenu.classList.remove('mobile-open'); setTimeout(() => mobileMenu.classList.add('hidden'), 400); });
       });
     }
 
