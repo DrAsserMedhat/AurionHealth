@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" class="scroll-smooth antialiased">
 <head>
   <meta charset="UTF-8" />
@@ -142,11 +142,112 @@
       font-style: italic;
       font-weight: 700 !important;
       color: #4FB2C4 !important;
-      text-shadow: 0 0 25px rgba(79, 178, 196, 0.4);
+      text-shadow: 0 0 32px rgba(79, 178, 196, 0.45), 0 0 64px rgba(79, 178, 196, 0.18);
       display: inline-block;
       letter-spacing: normal;
     }
+
+    /* === NEW LUXURY UTILITY CLASSES === */
+    .executive-card-dark {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px;
+      transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .executive-card-dark:hover {
+      border-color: rgba(79, 178, 196, 0.30);
+      background: rgba(255,255,255,0.05);
+      transform: translateY(-3px);
+      box-shadow: 0 20px 40px -12px rgba(79, 178, 196, 0.15);
+    }
+
+    .section-label {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'Space Grotesk', monospace;
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.20em; text-transform: uppercase;
+      color: #1B8A9E;
+    }
+    .section-label::before {
+      content: ''; display: inline-block;
+      width: 6px; height: 6px; border-radius: 50%;
+      background: #1B8A9E; flex-shrink: 0;
+    }
+    .section-label-dark {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'Space Grotesk', monospace;
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.20em; text-transform: uppercase;
+      color: #4FB2C4;
+    }
+    .section-label-dark::before {
+      content: ''; display: inline-block;
+      width: 6px; height: 6px; border-radius: 50%;
+      background: #4FB2C4; flex-shrink: 0;
+    }
+
+    .teal-rule {
+      height: 1.5px; width: 48px;
+      background: linear-gradient(to right, #4FB2C4, rgba(27,138,158,0.3));
+      border-radius: 2px;
+    }
+
+    .section-divider {
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(27,138,158,0.25) 30%, rgba(79,178,196,0.40) 50%, rgba(27,138,158,0.25) 70%, transparent);
+    }
+
+    .mandate-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 16px;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .mandate-card:hover {
+      border-color: rgba(79, 178, 196, 0.28);
+      background: rgba(79, 178, 196, 0.04);
+      transform: translateY(-3px);
+    }
+
+    .sector-card {
+      overflow: hidden; border-radius: 16px;
+      border: 1px solid rgba(42, 46, 51, 0.08);
+      transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+      background: #FFFFFF;
+    }
+    .sector-card:hover {
+      border-color: rgba(27, 138, 158, 0.28);
+      box-shadow: 0 20px 40px -12px rgba(27, 138, 158, 0.10);
+      transform: translateY(-4px);
+    }
+
+    .display-number {
+      font-family: 'Cinzel', 'Cormorant Garamond', serif;
+      font-weight: 400; color: rgba(79, 178, 196, 0.10);
+      line-height: 1; letter-spacing: -0.02em; user-select: none;
+    }
+
+    .footer-rule {
+      height: 1px;
+      background: linear-gradient(to right, rgba(79,178,196,0.40) 0%, rgba(79,178,196,0.15) 60%, transparent 100%);
+    }
+
+    .phase-connector {
+      position: absolute; top: 20px;
+      left: calc(100% - 1px); width: calc(100% + 24px); height: 1px;
+      background: linear-gradient(to right, rgba(79,178,196,0.35), rgba(79,178,196,0.08));
+      pointer-events: none;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in-up {
+      animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
   </style>
+
 </head>
 <body class="bg-canvas text-ink font-sans selection:bg-aurionTeal selection:text-white overflow-x-hidden">
 
@@ -200,7 +301,7 @@
               <div>
                 <div class="flex items-center space-x-2">
                   <span class="text-xs font-bold text-ink font-sans">International Patient Services</span>
-                  <span class="text-[9px] font-mono text-aurionGold font-bold uppercase">★ Flagship</span>
+                  <span class="text-[9px] font-mono text-aurionGold font-bold uppercase">â˜… Flagship</span>
                 </div>
                 <span class="block text-[11px] text-inkDim mt-0.5 font-sans">Bilateral referral corridors & digital Second Medical Opinion networks</span>
               </div>
@@ -351,8 +452,99 @@
   </section>
 
   <!-- ================================================================= -->
-  <!-- 2.1 EXECUTIVE METRIC STRIP (With Micro-Visuals & High Relevance)  -->
+  <!-- 2.1 EXECUTIVE METRIC STRIP (Dark Typographic Proof Strip)         -->
   <!-- ================================================================= -->
+  <section class="bg-[#080B0C] border-b border-white/[0.06] py-14 relative overflow-hidden">
+    <div class="absolute inset-0 pointer-events-none" style="background: linear-gradient(to right, rgba(12,74,84,0.2) 0%, transparent 60%)"></div>
+    <div class="relative max-w-7xl mx-auto px-6 sm:px-8">
+
+      <!-- Header row -->
+      <div class="mb-10 flex items-center justify-between">
+        <div class="section-label-dark">Proof of Practice</div>
+        <div class="hidden sm:block h-px flex-1 mx-8" style="background: linear-gradient(to right, rgba(79,178,196,0.20), transparent)"></div>
+        <div class="hidden sm:block text-[10px] font-mono text-white/25 tracking-widest uppercase">Founded Â· Cairo Â· Egypt</div>
+      </div>
+
+      <!-- 4-column dark stat strip -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 border border-white/[0.06] rounded-2xl overflow-hidden" style="background: rgba(255,255,255,0.01)">
+
+        <!-- Card 1 -->
+        <div class="relative bg-[#080B0C] p-8 flex flex-col justify-between group hover:bg-[#0E1416] transition-colors duration-300 border-r border-b border-white/[0.04]">
+          <div>
+            <div class="flex items-center space-x-2.5 mb-6">
+              <div class="w-8 h-8 rounded-lg bg-aurionTeal/10 border border-aurionTeal/20 flex items-center justify-center text-aurionTeal">
+                <i data-lucide="stethoscope" class="w-3.5 h-3.5"></i>
+              </div>
+              <span class="text-[9.5px] font-mono uppercase tracking-[0.20em] text-aurionTeal font-bold">Clinically Informed</span>
+            </div>
+            <div class="font-cinzel text-[44px] leading-none font-light mb-1" style="color: rgba(79,178,196,0.60)">16+</div>
+            <div class="text-[10px] font-mono text-white/30 uppercase tracking-widest mb-5">Years in Practice</div>
+            <div class="w-8 h-px mb-5" style="background: rgba(79,178,196,0.30)"></div>
+            <div class="font-cormorant text-lg font-semibold text-white leading-tight mb-2">Healthcare Expertise</div>
+            <p class="text-[11.5px] text-white/40 leading-relaxed font-sans">Senior advisory grounded in clinical, operational, and institutional reality.</p>
+          </div>
+          <div class="absolute bottom-0 left-0 right-0 h-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300" style="background: linear-gradient(to right, rgba(79,178,196,0.5), transparent)"></div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="relative bg-[#080B0C] p-8 flex flex-col justify-between group hover:bg-[#0E1416] transition-colors duration-300 border-r border-b border-white/[0.04]">
+          <div>
+            <div class="flex items-center space-x-2.5 mb-6">
+              <div class="w-8 h-8 rounded-lg bg-aurionTeal/10 border border-aurionTeal/20 flex items-center justify-center text-aurionTeal">
+                <i data-lucide="plane-takeoff" class="w-3.5 h-3.5"></i>
+              </div>
+              <span class="text-[9.5px] font-mono uppercase tracking-[0.20em] text-aurionTeal font-bold">Cross-Border</span>
+            </div>
+            <div class="font-cinzel text-[44px] leading-none font-light mb-1" style="color: rgba(79,178,196,0.60)">115+</div>
+            <div class="text-[10px] font-mono text-white/30 uppercase tracking-widest mb-5">Source Countries</div>
+            <div class="w-8 h-px mb-5" style="background: rgba(79,178,196,0.30)"></div>
+            <div class="font-cormorant text-lg font-semibold text-white leading-tight mb-2">Egypt â†” GCC</div>
+            <p class="text-[11.5px] text-white/40 leading-relaxed font-sans">Structured international patient pathways and cross-border partnerships.</p>
+          </div>
+          <div class="absolute bottom-0 left-0 right-0 h-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300" style="background: linear-gradient(to right, rgba(79,178,196,0.5), transparent)"></div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="relative bg-[#080B0C] p-8 flex flex-col justify-between group hover:bg-[#0E1416] transition-colors duration-300 border-r border-b border-white/[0.04]">
+          <div>
+            <div class="flex items-center space-x-2.5 mb-6">
+              <div class="w-8 h-8 rounded-lg bg-aurionTeal/10 border border-aurionTeal/20 flex items-center justify-center text-aurionTeal">
+                <i data-lucide="layers" class="w-3.5 h-3.5"></i>
+              </div>
+              <span class="text-[9.5px] font-mono uppercase tracking-[0.20em] text-aurionTeal font-bold">Integrated</span>
+            </div>
+            <div class="font-cinzel text-[44px] leading-none font-light mb-1" style="color: rgba(79,178,196,0.60)">08</div>
+            <div class="text-[10px] font-mono text-white/30 uppercase tracking-widest mb-5">Disciplines</div>
+            <div class="w-8 h-px mb-5" style="background: rgba(79,178,196,0.30)"></div>
+            <div class="font-cormorant text-lg font-semibold text-white leading-tight mb-2">8 Core Capabilities</div>
+            <p class="text-[11.5px] text-white/40 leading-relaxed font-sans">Strategy, operations, digital health, and commercial growth as one agenda.</p>
+          </div>
+          <div class="absolute bottom-0 left-0 right-0 h-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300" style="background: linear-gradient(to right, rgba(79,178,196,0.5), transparent)"></div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="relative bg-[#080B0C] p-8 flex flex-col justify-between group hover:bg-[#0E1416] transition-colors duration-300 border-b border-white/[0.04]">
+          <div>
+            <div class="flex items-center space-x-2.5 mb-6">
+              <div class="w-8 h-8 rounded-lg bg-aurionTeal/10 border border-aurionTeal/20 flex items-center justify-center text-aurionTeal">
+                <i data-lucide="trending-up" class="w-3.5 h-3.5"></i>
+              </div>
+              <span class="text-[9.5px] font-mono uppercase tracking-[0.20em] text-aurionTeal font-bold">Performance</span>
+            </div>
+            <div class="font-cinzel text-[44px] leading-none font-light mb-1" style="color: rgba(79,178,196,0.60)">24h</div>
+            <div class="text-[10px] font-mono text-white/30 uppercase tracking-widest mb-5">Partner Response</div>
+            <div class="w-8 h-px mb-5" style="background: rgba(79,178,196,0.30)"></div>
+            <div class="font-cormorant text-lg font-semibold text-white leading-tight mb-2">Execution That Moves</div>
+            <p class="text-[11.5px] text-white/40 leading-relaxed font-sans">Turning strategic priorities into measurable clinical and financial performance.</p>
+          </div>
+          <div class="absolute bottom-0 left-0 right-0 h-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300" style="background: linear-gradient(to right, rgba(79,178,196,0.5), transparent)"></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
   <section class="bg-canvasPure border-b border-canvasBorder py-12 relative">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -379,7 +571,7 @@
         <div class="p-5 sm:p-6 rounded-2xl bg-canvas border border-canvasBorder shadow-sm flex items-start gap-4 hover:border-aurionTeal/40 transition-all group">
           <div class="w-[38%] sm:w-[40%] max-w-[110px] aspect-square rounded-xl overflow-hidden shrink-0 border border-aurionTeal/20 shadow-sm relative group-hover:border-aurionTeal/40 transition-all">
             <img src="https://images.unsplash.com/photo-1488085061387-422e29b40080?auto=format&fit=crop&w=400&q=80" 
-                 alt="Egypt ↔ GCC" 
+                 alt="Egypt â†” GCC" 
                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
             <div class="absolute inset-0 bg-aurionTeal/15 mix-blend-multiply"></div>
           </div>
@@ -388,7 +580,7 @@
               <i data-lucide="plane-takeoff" class="w-3 h-3 shrink-0"></i>
               <span class="truncate">CROSS-BORDER</span>
             </div>
-            <div class="text-base sm:text-lg font-bold font-serif text-ink tracking-tight mt-1 leading-snug">Egypt ↔ GCC</div>
+            <div class="text-base sm:text-lg font-bold font-serif text-ink tracking-tight mt-1 leading-snug">Egypt â†” GCC</div>
             <p class="text-[11px] text-inkDim mt-1 leading-relaxed">Building structured international patient pathways and cross-border healthcare partnerships.</p>
           </div>
         </div>
@@ -438,7 +630,7 @@
   <!-- ================================================================= -->
   <!-- 3. ABOUT: EXECUTIVE MANDATE & PERSPECTIVE                         -->
   <!-- ================================================================= -->
-  <section id="about" class="py-24 bg-canvas border-b border-canvasBorder relative bg-drafting-grid">
+  <section id="about" class="bg-[#F8F9FB] border-b border-canvasBorder relative">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
       
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -447,8 +639,7 @@
             <i data-lucide="compass" class="w-3 h-3"></i>
             <span>Institutional Mandate</span>
           </div>
-          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-ink tracking-tight leading-tight">
-            Healthcare transformation fails when executed in <span class="font-fancy-italic text-aurionTeal font-normal">silos</span>.
+          <h2 class="font-cormorant text-[34px] sm:text-[44px] lg:text-[50px] font-bold text-ink tracking-tight leading-[1.05]">Healthcare transformation fails when executed in <span class="font-fancy-italic text-aurionTeal font-normal">silos</span>.
           </h2>
           <p class="text-sm sm:text-base text-inkMuted leading-relaxed">
             Healthcare organizations across Egypt and the GCC are operating in a defining era of privatization, universal coverage reforms, and cross-border mobility. Yet institutions routinely struggle with fragmented advisory: strategy conceived far from the clinic floor, digital investments stalling without physician buy-in, and expansion plans faltering without structured referral pipelines.
@@ -463,7 +654,7 @@
           <div class="p-8 sm:p-10 rounded-3xl bg-canvasPure border border-canvasBorder shadow-executive relative">
             <i data-lucide="quote" class="w-10 h-10 text-aurionTeal/20 mb-4"></i>
             <blockquote class="font-cormorant italic text-lg sm:text-xl text-ink leading-relaxed mb-6">
-              “We founded Aurion to close the divide between boardroom ambition and clinic-floor reality. Every engagement is delivered personally by our partners, combining clinical authority with commercial discipline to deliver outcomes that endure.”
+              â€œWe founded Aurion to close the divide between boardroom ambition and clinic-floor reality. Every engagement is delivered personally by our partners, combining clinical authority with commercial discipline to deliver outcomes that endure.â€
             </blockquote>
             
             <div class="pt-6 border-t border-canvasBorder flex items-center justify-between">
@@ -527,7 +718,7 @@
                 <span>OUR VISION</span>
               </div>
               <p class="font-serif text-xl sm:text-2xl font-bold text-white leading-relaxed tracking-tight">
-                To become the region’s most trusted healthcare advisory partner for turning <span class="text-aurionTeal-vibrant font-fancy-italic font-normal">complexity</span> into clarity, <span class="text-white underline decoration-aurionTeal/40 decoration-2 underline-offset-4">strategy into execution</span>, and ambition into impact.
+                To become the regionâ€™s most trusted healthcare advisory partner for turning <span class="text-aurionTeal-vibrant font-fancy-italic font-normal">complexity</span> into clarity, <span class="text-white underline decoration-aurionTeal/40 decoration-2 underline-offset-4">strategy into execution</span>, and ambition into impact.
               </p>
             </div>
 
@@ -536,7 +727,7 @@
                 <i data-lucide="crosshair" class="w-3 h-3 text-aurionTeal-vibrant"></i>
                 <span>Long-Term Horizon</span>
               </span>
-              <span class="text-aurionTeal-vibrant font-semibold">Egypt · GCC</span>
+              <span class="text-aurionTeal-vibrant font-semibold">Egypt Â· GCC</span>
             </div>
           </div>
 
@@ -689,7 +880,7 @@
               <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
               <span>Back to Vision & Mission</span>
             </button>
-            <span class="text-[10px] font-mono text-inkDim uppercase tracking-wider hidden sm:inline">Six Foundational Principles · Egypt & GCC</span>
+            <span class="text-[10px] font-mono text-inkDim uppercase tracking-wider hidden sm:inline">Six Foundational Principles Â· Egypt & GCC</span>
           </div>
         </div>
 
@@ -701,7 +892,7 @@
   <!-- ================================================================= -->
   <!-- 4. CAPABILITIES: STRATEGIC PRACTICE AREAS (Relevant 4K Photography)-->
   <!-- ================================================================= -->
-  <section id="capabilities" class="py-24 bg-canvasPure border-b border-canvasBorder relative">
+  <section id="capabilities" class="py-24 bg-[#F8F9FB] border-b border-canvasBorder relative">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
       
       <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
@@ -710,9 +901,7 @@
             <span class="w-1.5 h-1.5 rounded-full bg-aurionTeal"></span>
             <span>Strategic Capabilities</span>
           </div>
-          <h2 class="text-3xl sm:text-5xl font-serif font-bold text-ink tracking-tight">
-            Integrated Practice Areas
-          </h2>
+          <h2 class="font-cormorant text-[34px] sm:text-[50px] font-bold text-ink tracking-tight leading-[1.04]">Integrated Practice Areas</h2>
           <p class="text-inkMuted text-sm sm:text-base leading-relaxed pt-1">
             Structured advisory disciplines designed for health system boards, sovereign reform offices, and capital allocators seeking verified clinical and financial acceleration.
           </p>
@@ -741,7 +930,7 @@
               <i data-lucide="plane-takeoff" class="w-3 h-3 text-aurionTeal-vibrant"></i>
               <span>[ 01 ]</span>
             </div>
-            <span class="absolute top-4 right-4 px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-wider bg-aurionGold text-white font-bold backdrop-blur-md shadow">★ Flagship Practice</span>
+            <span class="absolute top-4 right-4 px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-wider bg-aurionGold text-white font-bold backdrop-blur-md shadow">â˜… Flagship Practice</span>
             
             <!-- Bottom Context Tag -->
             <div class="absolute bottom-3 left-4 right-4 flex items-center justify-between text-[11px] font-mono text-slate-200">
@@ -749,7 +938,7 @@
                 <i data-lucide="globe" class="w-3 h-3 text-aurionTeal-glow"></i>
                 <span>Cross-Border Medical Corridors</span>
               </span>
-              <span class="text-white font-bold">KSA · UAE · Egypt</span>
+              <span class="text-white font-bold">KSA Â· UAE Â· Egypt</span>
             </div>
           </div>
           <div class="p-8 flex-1 flex flex-col justify-between">
@@ -1136,111 +1325,93 @@
   </section>
 
   <!-- ================================================================= -->
-  <!-- 5. APPROACH: 4-PHASE EXECUTIVE METHOD                             -->
+  <!-- 5. APPROACH: 4-PHASE EXECUTIVE METHOD (Dark Cinematic Timeline)   -->
   <!-- ================================================================= -->
-  <section id="approach" class="py-24 bg-canvas border-b border-canvasBorder relative bg-drafting-grid">
-    <div class="max-w-7xl mx-auto px-6 sm:px-8">
-      
-      <div class="max-w-3xl mb-16 space-y-3">
-        <div class="inline-flex items-center space-x-2 text-[10px] font-mono uppercase tracking-widest text-aurionTeal font-bold">
-          <span class="w-1.5 h-1.5 rounded-full bg-aurionTeal"></span>
-          <span>Delivery Framework</span>
-        </div>
-        <h2 class="text-3xl sm:text-5xl font-serif font-bold text-ink tracking-tight">
-          How We Partner
-        </h2>
-        <p class="text-inkMuted text-sm sm:text-base leading-relaxed pt-1">
-          A disciplined, four-phase engagement framework designed to translate high-level boardroom vision into measurable clinical and financial reality.
-        </p>
+  <section id="approach" class="bg-[#050809] border-b border-white/[0.06] py-24 relative overflow-hidden">
+    <div class="absolute inset-0 pointer-events-none" style="background-image: linear-gradient(to right, rgba(79,178,196,0.025) 1px, transparent 1px), linear-gradient(to bottom, rgba(79,178,196,0.025) 1px, transparent 1px); background-size: 80px 80px;"></div>
+    <div class="absolute pointer-events-none" style="top:0; left:25%; width:384px; height:384px; background:rgba(79,178,196,0.05); border-radius:50%; filter:blur(100px);"></div>
+    <div class="relative max-w-7xl mx-auto px-6 sm:px-8">
+      <div class="max-w-3xl mb-16">
+        <div class="section-label-dark mb-4">Delivery Framework</div>
+        <h2 class="font-cormorant text-[36px] sm:text-[52px] font-bold text-white tracking-tight leading-[1.02]">How We Partner</h2>
+        <div class="w-12 h-px mt-5 mb-5" style="background: linear-gradient(to right, #4FB2C4, rgba(79,178,196,0.2))"></div>
+        <p class="text-white/45 text-[14px] sm:text-[15px] leading-[1.80] font-sans">A disciplined, four-phase engagement framework designed to translate high-level boardroom vision into measurable clinical and financial reality.</p>
       </div>
-
       <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-        
+
         <!-- Phase I -->
-        <div class="p-8 rounded-3xl bg-canvasPure border border-canvasBorder shadow-sm flex flex-col justify-between group hover:border-aurionTeal/40 transition-all">
-          <div>
-            <div class="flex items-center justify-between mb-4">
-              <span class="w-9 h-9 rounded-xl bg-aurionTeal-light text-aurionTeal flex items-center justify-center font-bold">
-                <i data-lucide="compass" class="w-4 h-4"></i>
-              </span>
-              <span class="font-mono text-xs font-bold text-inkDim uppercase tracking-wider">[ Phase I ]</span>
+        <div class="executive-card-dark p-8 flex flex-col relative" style="min-height:320px">
+          <div class="absolute top-4 right-5 font-cinzel font-light select-none pointer-events-none" style="font-size:90px; color:rgba(79,178,196,0.10); line-height:1">I</div>
+          <div class="relative z-10 flex flex-col h-full">
+            <div class="flex items-center space-x-3 mb-7">
+              <div class="w-9 h-9 rounded-xl border border-aurionTeal/30 flex items-center justify-center text-aurionTeal" style="background:rgba(79,178,196,0.08)"><i data-lucide="compass" class="w-4 h-4"></i></div>
+              <span class="font-mono text-[9.5px] text-aurionTeal/60 font-bold uppercase tracking-[0.20em]">Phase 01</span>
             </div>
-            <h3 class="text-lg font-bold text-ink mb-2 font-serif">Diagnose & Align</h3>
-            <p class="text-xs text-inkMuted leading-relaxed">
-              Rapid, evidence-based diagnostic sprints engaging board chairs, medical directors, and finance leads to isolate systemic bottlenecks and quantify growth opportunities.
-            </p>
-          </div>
-          <div class="mt-6 pt-4 border-t border-canvasBorder text-[11px] font-mono text-aurionTeal font-semibold">
-            Deliverable: Diagnostic Memo & Audit
+            <h3 class="font-cormorant text-[21px] font-bold text-white leading-tight mb-3">Diagnose & Align</h3>
+            <p class="text-[12.5px] text-white/45 leading-[1.75] font-sans flex-1">Rapid, evidence-based diagnostic sprints engaging board chairs, medical directors, and finance leads to isolate systemic bottlenecks and quantify growth opportunities.</p>
+            <div class="mt-7 pt-5" style="border-top: 1px solid rgba(255,255,255,0.08)">
+              <div class="inline-flex items-center space-x-2"><span class="w-1.5 h-1.5 rounded-full bg-aurionTeal shrink-0"></span><span class="text-[10.5px] font-mono text-aurionTeal font-bold tracking-wide">Diagnostic Memo & Audit</span></div>
+            </div>
           </div>
         </div>
 
         <!-- Phase II -->
-        <div class="p-8 rounded-3xl bg-canvasPure border border-canvasBorder shadow-sm flex flex-col justify-between group hover:border-aurionTeal/40 transition-all">
-          <div>
-            <div class="flex items-center justify-between mb-4">
-              <span class="w-9 h-9 rounded-xl bg-aurionTeal-light text-aurionTeal flex items-center justify-center font-bold">
-                <i data-lucide="git-merge" class="w-4 h-4"></i>
-              </span>
-              <span class="font-mono text-xs font-bold text-inkDim uppercase tracking-wider">[ Phase II ]</span>
+        <div class="executive-card-dark p-8 flex flex-col relative" style="min-height:320px">
+          <div class="absolute top-4 right-5 font-cinzel font-light select-none pointer-events-none" style="font-size:90px; color:rgba(79,178,196,0.10); line-height:1">II</div>
+          <div class="relative z-10 flex flex-col h-full">
+            <div class="flex items-center space-x-3 mb-7">
+              <div class="w-9 h-9 rounded-xl border border-aurionTeal/30 flex items-center justify-center text-aurionTeal" style="background:rgba(79,178,196,0.08)"><i data-lucide="git-merge" class="w-4 h-4"></i></div>
+              <span class="font-mono text-[9.5px] text-aurionTeal/60 font-bold uppercase tracking-[0.20em]">Phase 02</span>
             </div>
-            <h3 class="text-lg font-bold text-ink mb-2 font-serif">Architect & Plan</h3>
-            <p class="text-xs text-inkMuted leading-relaxed">
-              Formulating board-ready target operating models, cross-border corridor pathways, or spatial designs with phased, actionable 18-24 month execution roadmaps.
-            </p>
-          </div>
-          <div class="mt-6 pt-4 border-t border-canvasBorder text-[11px] font-mono text-aurionTeal font-semibold">
-            Deliverable: Board Strategy Blueprint
+            <h3 class="font-cormorant text-[21px] font-bold text-white leading-tight mb-3">Architect & Plan</h3>
+            <p class="text-[12.5px] text-white/45 leading-[1.75] font-sans flex-1">Formulating board-ready target operating models, cross-border corridor pathways, or spatial designs with phased, actionable 18-24 month execution roadmaps.</p>
+            <div class="mt-7 pt-5" style="border-top: 1px solid rgba(255,255,255,0.08)">
+              <div class="inline-flex items-center space-x-2"><span class="w-1.5 h-1.5 rounded-full bg-aurionTeal shrink-0"></span><span class="text-[10.5px] font-mono text-aurionTeal font-bold tracking-wide">Board Strategy Blueprint</span></div>
+            </div>
           </div>
         </div>
 
         <!-- Phase III -->
-        <div class="p-8 rounded-3xl bg-canvasPure border border-canvasBorder shadow-sm flex flex-col justify-between group hover:border-aurionTeal/40 transition-all">
-          <div>
-            <div class="flex items-center justify-between mb-4">
-              <span class="w-9 h-9 rounded-xl bg-aurionTeal-light text-aurionTeal flex items-center justify-center font-bold">
-                <i data-lucide="zap" class="w-4 h-4"></i>
-              </span>
-              <span class="font-mono text-xs font-bold text-inkDim uppercase tracking-wider">[ Phase III ]</span>
+        <div class="executive-card-dark p-8 flex flex-col relative" style="min-height:320px">
+          <div class="absolute top-4 right-5 font-cinzel font-light select-none pointer-events-none" style="font-size:90px; color:rgba(79,178,196,0.10); line-height:1">III</div>
+          <div class="relative z-10 flex flex-col h-full">
+            <div class="flex items-center space-x-3 mb-7">
+              <div class="w-9 h-9 rounded-xl border border-aurionTeal/30 flex items-center justify-center text-aurionTeal" style="background:rgba(79,178,196,0.08)"><i data-lucide="zap" class="w-4 h-4"></i></div>
+              <span class="font-mono text-[9.5px] text-aurionTeal/60 font-bold uppercase tracking-[0.20em]">Phase 03</span>
             </div>
-            <h3 class="text-lg font-bold text-ink mb-2 font-serif">Mobilize & Execute</h3>
-            <p class="text-xs text-inkMuted leading-relaxed">
-              Direct partner oversight of PMO cadence, clinical SOP adoption, vendor alignment, and bilateral government/payer agreements to drive sustained velocity.
-            </p>
-          </div>
-          <div class="mt-6 pt-4 border-t border-canvasBorder text-[11px] font-mono text-aurionTeal font-semibold">
-            Deliverable: PMO & Governance Cadence
+            <h3 class="font-cormorant text-[21px] font-bold text-white leading-tight mb-3">Mobilize & Execute</h3>
+            <p class="text-[12.5px] text-white/45 leading-[1.75] font-sans flex-1">Direct partner oversight of PMO cadence, clinical SOP adoption, vendor alignment, and bilateral government/payer agreements to drive sustained velocity.</p>
+            <div class="mt-7 pt-5" style="border-top: 1px solid rgba(255,255,255,0.08)">
+              <div class="inline-flex items-center space-x-2"><span class="w-1.5 h-1.5 rounded-full bg-aurionTeal shrink-0"></span><span class="text-[10.5px] font-mono text-aurionTeal font-bold tracking-wide">PMO & Governance Cadence</span></div>
+            </div>
           </div>
         </div>
 
         <!-- Phase IV -->
-        <div class="p-8 rounded-3xl bg-canvasPure border border-canvasBorder shadow-sm flex flex-col justify-between group hover:border-aurionTeal/40 transition-all">
-          <div>
-            <div class="flex items-center justify-between mb-4">
-              <span class="w-9 h-9 rounded-xl bg-aurionTeal-light text-aurionTeal flex items-center justify-center font-bold">
-                <i data-lucide="award" class="w-4 h-4"></i>
-              </span>
-              <span class="font-mono text-xs font-bold text-inkDim uppercase tracking-wider">[ Phase IV ]</span>
+        <div class="executive-card-dark p-8 flex flex-col relative" style="min-height:320px">
+          <div class="absolute top-4 right-5 font-cinzel font-light select-none pointer-events-none" style="font-size:90px; color:rgba(79,178,196,0.10); line-height:1">IV</div>
+          <div class="relative z-10 flex flex-col h-full">
+            <div class="flex items-center space-x-3 mb-7">
+              <div class="w-9 h-9 rounded-xl border border-aurionTeal/30 flex items-center justify-center text-aurionTeal" style="background:rgba(79,178,196,0.08)"><i data-lucide="award" class="w-4 h-4"></i></div>
+              <span class="font-mono text-[9.5px] text-aurionTeal/60 font-bold uppercase tracking-[0.20em]">Phase 04</span>
             </div>
-            <h3 class="text-lg font-bold text-ink mb-2 font-serif">Realize & Sustain</h3>
-            <p class="text-xs text-inkMuted leading-relaxed">
-              Tracking realized clinical throughput, foreign patient revenue, and operational velocity against baseline KPIs, transferring internal capabilities to client leadership.
-            </p>
-          </div>
-          <div class="mt-6 pt-4 border-t border-canvasBorder text-[11px] font-mono text-aurionTeal font-semibold">
-            Deliverable: Benefits Realization & Handover
+            <h3 class="font-cormorant text-[21px] font-bold text-white leading-tight mb-3">Realize & Sustain</h3>
+            <p class="text-[12.5px] text-white/45 leading-[1.75] font-sans flex-1">Tracking realized clinical throughput, foreign patient revenue, and operational velocity against baseline KPIs, transferring internal capabilities to client leadership.</p>
+            <div class="mt-7 pt-5" style="border-top: 1px solid rgba(255,255,255,0.08)">
+              <div class="inline-flex items-center space-x-2"><span class="w-1.5 h-1.5 rounded-full bg-aurionTeal shrink-0"></span><span class="text-[10.5px] font-mono text-aurionTeal font-bold tracking-wide">Benefits Realization & Handover</span></div>
+            </div>
           </div>
         </div>
 
       </div>
-
+      <div class="mt-10 flex items-center justify-center"><span class="text-[10px] font-mono text-white/20 uppercase tracking-[0.20em]">Founder-Led Â· Partner-Delivered Â· Evidence-Based</span></div>
     </div>
   </section>
 
   <!-- ================================================================= -->
   <!-- 6. SECTORS: WHO WE ADVISE (With Photographic Visual Badges)       -->
   <!-- ================================================================= -->
-  <section id="sectors" class="py-24 bg-canvasPure border-b border-canvasBorder relative">
+  <section id="sectors" class="bg-[#F8F9FB] border-b border-canvasBorder py-24 relative">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
       
       <div class="max-w-3xl mb-16 space-y-3">
@@ -1367,17 +1538,12 @@
   <!-- ================================================================= -->
   <!-- 7. MANDATES: SELECTED ENGAGEMENT HIGHLIGHTS                       -->
   <!-- ================================================================= -->
-  <section id="mandates" class="py-24 bg-canvas border-b border-canvasBorder relative bg-drafting-grid">
+  <section id="mandates" class="bg-[#070A0C] border-b border-white/[0.06] py-24 relative overflow-hidden">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
       
       <div class="max-w-3xl mb-16 space-y-3">
-        <div class="inline-flex items-center space-x-2 text-[10px] font-mono uppercase tracking-widest text-aurionTeal font-bold">
-          <span class="w-1.5 h-1.5 rounded-full bg-aurionTeal"></span>
-          <span>Illustrative Scenarios</span>
-        </div>
-        <h2 class="text-3xl sm:text-5xl font-serif font-bold text-ink tracking-tight">
-          How We'd Approach a Mandate
-        </h2>
+        <div class="section-label-dark">Illustrative Scenarios</div>
+        <h2 class="font-cormorant text-[34px] sm:text-[50px] font-bold text-white tracking-tight leading-[1.04]">How We'd Approach a Mandate</h2>
         <p class="text-inkMuted text-sm sm:text-base leading-relaxed pt-1">
           Illustrative scenarios only , not completed engagements , showing how our senior-only advisory approach would translate strategic ambition into institutional performance.
         </p>
@@ -1386,7 +1552,7 @@
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         
         <!-- Mandate 1 -->
-        <div class="p-8 rounded-3xl bg-canvasPure border border-canvasBorder shadow-executive flex flex-col justify-between">
+        <div class="mandate-card p-8 flex flex-col justify-between relative overflow-hidden group">
           <div>
             <div class="flex items-center justify-between text-xs font-mono mb-4">
               <span class="inline-flex items-center space-x-1.5 text-aurionTeal font-bold">
@@ -1432,7 +1598,7 @@
         </div>
 
         <!-- Mandate 3 -->
-        <div class="p-8 rounded-3xl bg-canvasPure border border-canvasBorder shadow-executive flex flex-col justify-between">
+        <div class="mandate-card p-8 flex flex-col justify-between relative overflow-hidden group">
           <div>
             <div class="flex items-center justify-between text-xs font-mono mb-4">
               <span class="inline-flex items-center space-x-1.5 text-aurionTeal font-bold">
@@ -1472,15 +1638,13 @@
           <span class="w-1.5 h-1.5 rounded-full bg-aurionTeal animate-pulse"></span>
           <span>THE FOUNDERS</span>
         </div>
-        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-ink tracking-tight leading-[1.15]">
-          Built at the Intersection of Healthcare, Strategy &amp; Growth
-        </h2>
+        <h2 class="font-cormorant text-[34px] sm:text-[48px] font-bold text-ink tracking-tight leading-[1.05]">Built at the Intersection of Healthcare, Strategy &amp; Growth</h2>
         <p class="text-inkMuted text-sm sm:text-base leading-relaxed pt-1 font-sans">
           Aurion is led by two complementary healthcare executives bringing together clinical insight, strategic management, operational transformation, commercial growth, and international healthcare expertise.
         </p>
       </div>
 
-      <!-- Executive Founders Board — Balanced 2-Column Desktop Layout -->
+      <!-- Executive Founders Board â€” Balanced 2-Column Desktop Layout -->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 max-w-6xl mx-auto items-stretch">
         
         <!-- Dr. Asser Medhat: Executive Card -->
@@ -1504,14 +1668,14 @@
                   Healthcare Strategy, Transformation &amp; International Patient Services
                 </div>
                 <div class="mt-2.5 inline-flex items-center px-2.5 py-0.5 rounded-full bg-aurionTeal-light/60 border border-aurionTeal/20 text-[9px] sm:text-[10px] font-mono font-bold tracking-widest-luxury uppercase text-aurionTeal-dark">
-                  BUILD • TRANSFORM • OPERATE
+                  BUILD â€¢ TRANSFORM â€¢ OPERATE
                 </div>
               </div>
             </div>
 
             <div class="space-y-3 text-xs sm:text-sm text-inkMuted leading-relaxed font-sans">
               <p>Dr. Asser Medhat is a physician executive and healthcare transformation advisor with 16+ years of combined clinical, operational, and strategic experience across Egypt, the GCC, Africa, and international healthcare networks.</p>
-              <p>He leads Aurion’s strategy, healthcare transformation, operational excellence, and international patient-services initiatives, bringing together clinical credibility, strategic management, and execution discipline.</p>
+              <p>He leads Aurionâ€™s strategy, healthcare transformation, operational excellence, and international patient-services initiatives, bringing together clinical credibility, strategic management, and execution discipline.</p>
             </div>
           </div>
 
@@ -1572,14 +1736,14 @@
                   Healthcare Marketing, Commercial Growth &amp; Medical Tourism
                 </div>
                 <div class="mt-2.5 inline-flex items-center px-2.5 py-0.5 rounded-full bg-aurionTeal-light/60 border border-aurionTeal/20 text-[9px] sm:text-[10px] font-mono font-bold tracking-widest-luxury uppercase text-aurionTeal-dark">
-                  GROW • POSITION • EXPAND
+                  GROW â€¢ POSITION â€¢ EXPAND
                 </div>
               </div>
             </div>
 
             <div class="space-y-3 text-xs sm:text-sm text-inkMuted leading-relaxed font-sans">
               <p>Dr. Asmaa Salman is a healthcare executive and strategic marketing leader with 15+ years of experience across healthcare marketing, business development, branding, medical tourism, and international healthcare partnerships.</p>
-              <p>She leads Aurion’s growth and commercial strategy, combining market intelligence, destination positioning, brand development, and business growth to create sustainable healthcare platforms and premium patient experiences.</p>
+              <p>She leads Aurionâ€™s growth and commercial strategy, combining market intelligence, destination positioning, brand development, and business growth to create sustainable healthcare platforms and premium patient experiences.</p>
             </div>
           </div>
 
@@ -1627,7 +1791,7 @@
   <!-- ================================================================= -->
   <!-- 9. CONTACT: EXECUTIVE INQUIRY                                     -->
   <!-- ================================================================= -->
-  <section id="contact" class="py-24 bg-canvas border-b border-canvasBorder relative bg-drafting-grid">
+  <section id="contact" class="bg-[#050809] border-b border-white/[0.06] py-28 relative overflow-hidden">
     <div class="max-w-4xl mx-auto px-6 sm:px-8">
       
       <div class="max-w-3xl mb-14 space-y-3 text-center mx-auto">
@@ -1635,8 +1799,7 @@
           <span class="w-1.5 h-1.5 rounded-full bg-aurionTeal"></span>
           <span>Confidential Advisory</span>
         </div>
-        <h2 class="text-3xl sm:text-5xl font-serif font-bold text-ink tracking-tight">
-          Schedule an Executive Consultation
+        <h2 class="font-cormorant text-[36px] sm:text-[54px] font-bold text-white tracking-tight leading-[1.04]">Schedule an Executive Consultation
         </h2>
         <p class="text-inkMuted text-sm sm:text-base leading-relaxed pt-1">
           Direct correspondence with managing partners Dr. Asser Medhat and Dr. Asmaa Salman.
@@ -1705,7 +1868,7 @@
   <!-- ================================================================= -->
   <!-- 10. FOOTER                                                        -->
   <!-- ================================================================= -->
-  <footer class="bg-black border-t border-white/10 py-16">
+  <footer class="bg-[#050809] text-white relative overflow-hidden">
     <div class="max-w-7xl mx-auto px-6 sm:px-8">
       <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-12">
         <div class="md:col-span-5 space-y-4">
@@ -1723,7 +1886,7 @@
         <div class="md:col-span-4 space-y-3">
           <div class="text-xs font-mono uppercase tracking-widest text-white font-bold">Capabilities</div>
           <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-400 font-mono">
-            <li><button onclick="openPracticeDrawer('ips')" class="hover:text-aurionTeal-vibrant transition-colors text-left">★ International Corridors</button></li>
+            <li><button onclick="openPracticeDrawer('ips')" class="hover:text-aurionTeal-vibrant transition-colors text-left">â˜… International Corridors</button></li>
             <li><button onclick="openPracticeDrawer('strategy')" class="hover:text-aurionTeal-vibrant transition-colors text-left">Strategy & Transformation</button></li>
             <li><button onclick="openPracticeDrawer('ops')" class="hover:text-aurionTeal-vibrant transition-colors text-left">Operations & Turnaround</button></li>
             <li><button onclick="openPracticeDrawer('spaces')" class="hover:text-aurionTeal-vibrant transition-colors text-left">Elite Aesthetics &amp; Wellness Design</button></li>
@@ -1748,13 +1911,13 @@
 
       <div class="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-[11px] font-mono text-slate-400 gap-4">
         <div>
-          © 2026 Aurion Health Advisory. All Rights Reserved.
+          Â© 2026 Aurion Health Advisory. All Rights Reserved.
         </div>
         <div class="flex items-center space-x-3 text-aurionTeal-vibrant font-bold tracking-widest">
           <span>STRATEGY</span>
-          <span>•</span>
+          <span>â€¢</span>
           <span>TRANSFORMATION</span>
-          <span>•</span>
+          <span>â€¢</span>
           <span>IMPACT</span>
         </div>
       </div>
@@ -1838,7 +2001,7 @@
     const practiceDirectory = {
       ips: {
         title: "International Patient Services, Medical Tourism & Telehealth",
-        tag: "★ Flagship Practice",
+        tag: "â˜… Flagship Practice",
         lead: "Dr. Asser Medhat Lead",
         overview: "Designing turnkey International Patient Departments (IPD), bilateral government referral corridors, and digital Second Medical Opinion networks linking source-market demand with specialized tertiary providers.",
         focusAreas: [
@@ -2030,15 +2193,15 @@
         name: "Dr. Asser Medhat",
         role: "FOUNDER & MANAGING PARTNER",
         strategicRole: "Healthcare Strategy, Transformation & International Patient Services",
-        microPositioning: "BUILD • TRANSFORM • OPERATE",
+        microPositioning: "BUILD â€¢ TRANSFORM â€¢ OPERATE",
         image: "dr-asser-medhat.png",
         bio: [
           { content: "Dr. Asser Medhat is a physician executive and healthcare transformation leader with more than 16 years of combined clinical, operational, and strategic experience across Egypt, the GCC, Africa, and international healthcare networks. He combines strong clinical grounding in obstetrics and gynecology with an MBA in Strategic Management and a career shaped by healthcare operations leadership, digital health implementation, international patient services, medical education, and cross-border partnerships. His work is distinguished by a consistent focus on operational excellence, measurable performance improvement, patient access, and scalable healthcare growth." },
           { title: "CLINICAL LEADERSHIP WITH MANAGERIAL DEPTH", content: "He began his career as an obstetrics and gynecology physician, delivering comprehensive clinical care while also contributing to departmental workflow, coordination, and service continuity in major healthcare settings. At the Greek Community Hospital and Ain Shams Maternity Hospital, his role extended beyond direct patient care into managerial support, process alignment, and service oversight, giving him a practical understanding of how clinical quality, team coordination, and operational discipline intersect in real healthcare environments. That clinical foundation remains central to his executive perspective today." },
           { title: "HEALTHCARE OPERATIONS & OPERATIONAL EXCELLENCE", content: "Dr. Asser has led multisite healthcare operations and transformation programs designed to improve performance, reduce waste, and strengthen governance. During his leadership at Mersal Foundation under the UNHCR project, he played a central role in establishing and directing the nationwide primary healthcare program across Egypt, covering planning, budgeting, workforce deployment, quality management, referral coordination, and performance monitoring for refugee and vulnerable populations. The program supported more than 25,000 patients annually and achieved a 60% reduction in referral delays through process redesign and operational governance. Across his broader leadership roles, he has delivered improvements including 35% higher system efficiency, 20% lower operating cost, and 30% better workflow performance through disciplined execution and data-driven management." },
           { title: "DIGITAL TRANSFORMATION & TELEHEALTH LEADERSHIP", content: "He is recognized for leading digital health initiatives that translated strategy into operational impact. His experience includes EMR implementation, HIS optimization, telehealth deployment, digital workflow redesign, and healthcare process automation across Egypt, the GCC, and international healthcare environments. Through these programs, he helped strengthen governance, reduce duplication, improve service turnaround, and elevate patient experience. His telehealth and second medical opinion work has supported faster clinical access, better case coordination, and more efficient cross-border healthcare delivery, including large-scale international oncology and specialty care pathways serving patients from more than 40 countries. In these settings, he contributed to a 45% reduction in case processing time and 97% patient satisfaction, reflecting both clinical credibility and operational execution." },
-          { title: "INTERNATIONAL PATIENT SERVICES, MEDICAL TOURISM & STRATEGIC PARTNERSHIPS", content: "A major part of Dr. Asser’s executive profile is his work in international patient services and medical tourism. He has built and managed patient journey models spanning second medical opinion, teleconsultation, care coordination, concierge support, travel facilitation, and cross-border referral management. His work has connected patients and referring partners with leading healthcare institutions in France, the United Kingdom, the United States, and Germany, including strategic affiliations and coordination pathways with major centers such as Gustave Roussy and Rothschild. He has also contributed to international outreach and regional expansion models in Africa and the GCC, helping healthcare organizations grow through referral networks, satellite models, and partnership-led market access. This combination of partnership development, patient navigation, and service design gives his profile a strong strategic dimension well beyond operations alone." },
-          { title: "MEDICAL EDUCATION & NATIONAL PROGRAMS", content: "Dr. Asser has also led major medical education and institutional development initiatives with governmental, academic, and global healthcare stakeholders. He served in leadership roles on large-scale programs including the EPIC initiative under the Presidential Initiative and the Ministry of Health, as well as the Ministry of Higher Education’s international live discussions platform that connected more than 100 hospitals and academic institutions in a single remote MDT learning ecosystem with global-ranked partners. He has also contributed to CME programs involving more than 1,500 healthcare professionals and 80+ credit hours, reinforcing his ability to build knowledge networks that improve capability, clinical alignment, and institutional performance at scale." },
+          { title: "INTERNATIONAL PATIENT SERVICES, MEDICAL TOURISM & STRATEGIC PARTNERSHIPS", content: "A major part of Dr. Asserâ€™s executive profile is his work in international patient services and medical tourism. He has built and managed patient journey models spanning second medical opinion, teleconsultation, care coordination, concierge support, travel facilitation, and cross-border referral management. His work has connected patients and referring partners with leading healthcare institutions in France, the United Kingdom, the United States, and Germany, including strategic affiliations and coordination pathways with major centers such as Gustave Roussy and Rothschild. He has also contributed to international outreach and regional expansion models in Africa and the GCC, helping healthcare organizations grow through referral networks, satellite models, and partnership-led market access. This combination of partnership development, patient navigation, and service design gives his profile a strong strategic dimension well beyond operations alone." },
+          { title: "MEDICAL EDUCATION & NATIONAL PROGRAMS", content: "Dr. Asser has also led major medical education and institutional development initiatives with governmental, academic, and global healthcare stakeholders. He served in leadership roles on large-scale programs including the EPIC initiative under the Presidential Initiative and the Ministry of Health, as well as the Ministry of Higher Educationâ€™s international live discussions platform that connected more than 100 hospitals and academic institutions in a single remote MDT learning ecosystem with global-ranked partners. He has also contributed to CME programs involving more than 1,500 healthcare professionals and 80+ credit hours, reinforcing his ability to build knowledge networks that improve capability, clinical alignment, and institutional performance at scale." },
           { title: "CONSULTING, ADVISORY & CORPORATE TRAINING", content: "In parallel with his executive roles, Dr. Asser serves as an independent consultant and trainer for international advisory and technology networks, including GLG, Guidepoint, Micro1 AI Solutions, and OpenAI-related consulting work. He is also a UpToDate Certified Trainer and delivers corporate training programs for healthcare organizations and leadership teams, translating clinical expertise and strategic insight into practical capability-building, executive advisory, and scalable knowledge transfer." },
           { title: "EXECUTIVE PROFILE", content: "Across his career, Dr. Asser has consistently operated at the intersection of medicine, management, and transformation. He brings a rare combination of physician legitimacy, strategic management capability, operational discipline, and partnership-building skill. Whether leading national primary healthcare delivery, redesigning digital pathways, managing international patient services, or building medical education ecosystems, his focus remains the same: measurable improvement, sustainable growth, and healthcare performance that is both clinically sound and commercially intelligent." }
         ]
@@ -2047,7 +2210,7 @@
         name: "Dr. Asmaa Salman",
         role: "FOUNDER & MANAGING PARTNER",
         strategicRole: "Healthcare Marketing, Commercial Growth & Medical Tourism",
-        microPositioning: "GROW • POSITION • EXPAND",
+        microPositioning: "GROW â€¢ POSITION â€¢ EXPAND",
         image: "dr-asmaa-salman.png",
         bio: [
           { content: "Dr. Asmaa Salman is a distinguished healthcare executive, strategic marketing leader, and business development expert with over 15 years of experience leading transformational initiatives across healthcare, branding, and medical tourism." },
@@ -2151,7 +2314,7 @@
 
       <!-- Modal Footer -->
       <div class="p-5 sm:p-6 bg-canvas border-t border-canvasBorder flex flex-wrap items-center justify-between gap-4 shrink-0">
-        <span class="text-[11px] font-mono text-inkDim">Aurion Health Advisory • Executive Board</span>
+        <span class="text-[11px] font-mono text-inkDim">Aurion Health Advisory â€¢ Executive Board</span>
         <div class="flex items-center space-x-3">
           <a href="#contact" onclick="closeFounderModal()" class="px-5 py-2.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider text-noir bg-gradient-to-r from-aurionTeal-vibrant to-aurionTeal-glow hover:brightness-110 shadow-glow-teal transition-all flex items-center space-x-1.5">
             <span>Executive Consultation</span>
@@ -2164,3 +2327,7 @@
   </div>
 </body>
 </html>
+
+
+
+
